@@ -1,5 +1,5 @@
 // COBOL Academy — progress tracking (localStorage) + quiz logic
-const TOTAL_LESSONS = 10;
+const TOTAL_LESSONS = 17;
 const STORAGE_KEY = 'cobol-academy-progress';
 
 function getProgress(){

@@ -22,7 +22,7 @@
     <div class="jcl">// QUIZ01 JOB (COBOL),'FINAL',CLASS=A<br>// EXEC COBOL</div>
     <p class="eyebrow">מבחן מסכם</p>
     <h1>בדקו את הידע שלכם</h1>
-    <p class="muted">8 שאלות על החומר משיעורים 1–10. בחרו תשובה — המשוב מיידי.</p>
+    <p class="muted">15 שאלות על החומר משיעורים 1–17. בחרו תשובה — המשוב מיידי.</p>
   </section>
 
   <section style="padding-top:0">
@@ -96,6 +96,69 @@
         <label class="opt" data-value="a"><input type="radio" name="q8"> השארית של החילוק</label>
         <label class="opt" data-value="b"><input type="radio" name="q8"> תוצאת החילוק המלאה</label>
         <label class="opt" data-value="c"><input type="radio" name="q8"> מספר האנשים</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">9. אם WS-AGE שווה ל-15, מה תדפיס <code>IF WS-AGE &gt; 18 DISPLAY "ADULT" ELSE DISPLAY "MINOR" END-IF</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q9"> MINOR</label>
+        <label class="opt" data-value="b"><input type="radio" name="q9"> ADULT</label>
+        <label class="opt" data-value="c"><input type="radio" name="q9"> שגיאה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q">10. מה תפקידו של WHEN OTHER בתוך EVALUATE?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q10"> עוצר את התוכנית</label>
+        <label class="opt" data-value="b"><input type="radio" name="q10"> ענף ברירת מחדל, כשאף WHEN קודם לא התאים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q10"> חוזר על הבדיקה מההתחלה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">11. מה עושה PERFORM כשקוראים לו עם שם פסקה (paragraph)?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q11"> מוחק את הפסקה</label>
+        <label class="opt" data-value="b"><input type="radio" name="q11"> מדפיס את שם הפסקה למסך</label>
+        <label class="opt" data-value="c"><input type="radio" name="q11"> קופץ לפסקה, מריץ אותה, וחוזר למקום שבו הופעל</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">12. כמה פעמים ידפיס <code>PERFORM 3 TIMES DISPLAY "HELLO" END-PERFORM</code> את המילה HELLO?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q12"> 3</label>
+        <label class="opt" data-value="b"><input type="radio" name="q12"> אינסוף, עד שעוצרים ידנית</label>
+        <label class="opt" data-value="c"><input type="radio" name="q12"> פעם אחת בלבד</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q code-q">13. מה עושה <code>OCCURS 12 TIMES</code> בהגדרת משתנה?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q13"> מגביל את המשתנה לערך אחד בלבד</label>
+        <label class="opt" data-value="b"><input type="radio" name="q13"> הופך את המשתנה לטבלה עם 12 תאים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q13"> מכפיל את הערך פי 12</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">14. בלולאה <code>PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX &gt; 5</code>, כמה חזרות יתבצעו?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q14"> 5</label>
+        <label class="opt" data-value="b"><input type="radio" name="q14"> 4</label>
+        <label class="opt" data-value="c"><input type="radio" name="q14"> 6</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">15. מה תפקידו של סעיף AT END בפקודת READ על קובץ?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q15"> מוחק את הקובץ בסיום הקריאה</label>
+        <label class="opt" data-value="b"><input type="radio" name="q15"> פותח את הקובץ לכתיבה</label>
+        <label class="opt" data-value="c"><input type="radio" name="q15"> מגדיר מה לעשות כשמגיעים לסוף הקובץ</label>
       </div>
     </div>
 

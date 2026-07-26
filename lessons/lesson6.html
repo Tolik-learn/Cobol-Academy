@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 6 — ACCEPT | COBOL Academy</title>
+<title>שיעור 14 — PERFORM TIMES / UNTIL | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,36 +19,34 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON06 JOB (COBOL),'ACCEPT',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 6 מתוך 10</p>
-    <h1>ACCEPT</h1>
-    <p class="muted">איך תוכנית COBOL מקבלת קלט מהמשתמש.</p>
+    <div class="jcl">// LESSON14 JOB (COBOL),'PERFORM2',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 14 מתוך 17</p>
+    <h1>PERFORM TIMES / UNTIL</h1>
+    <p class="muted">שתי הצורות הבסיסיות של לולאה ב-COBOL.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>ACCEPT — קליטת קלט</h2>
-<p>ACCEPT היא הפקודה ההפוכה ל-DISPLAY: במקום להוציא מידע החוצה, היא קולטת מידע מהמשתמש (או ממקור חיצוני אחר) ושומרת אותו לתוך משתנה.</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IDENTIFICATION DIVISION.
-PROGRAM-ID. GETNAME.
-
-DATA DIVISION.
-WORKING-STORAGE SECTION.
-01  WS-NAME   PIC X(20).
-
-PROCEDURE DIVISION.
-    DISPLAY "ENTER YOUR NAME: ".
-    ACCEPT WS-NAME.
-    DISPLAY "WELCOME, " WS-NAME.
-    STOP RUN.</code></pre></div>
+    <h2>PERFORM TIMES / UNTIL — לולאות אמיתיות</h2>
+<p>ל-PERFORM יש גם צורות שחוזרות על עצמן — אלו הלולאות (loops) של COBOL.</p>
+<h3 style="font-size:1.1rem;margin-top:1.6rem">PERFORM ... TIMES — מספר חזרות קבוע</h3>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>PERFORM 3 TIMES
+    DISPLAY "HELLO"
+END-PERFORM.</code></pre></div>
 <div class="explain">
-<div class="row"><code>DISPLAY "ENTER YOUR NAME: ".</code><span>מציג הנחיה למשתמש — נהוג להציג הודעה לפני כל ACCEPT.</span></div>
-<div class="row"><code>ACCEPT WS-NAME.</code><span>התוכנית עוצרת וממתינה שהמשתמש יקליד ערך ולוחץ Enter.</span></div>
-<div class="row"><code>DISPLAY "WELCOME, " WS-NAME.</code><span>מציג את מה שהמשתמש הקליד.</span></div>
+<div class="row"><code>PERFORM 3 TIMES</code><span>חוזר על מה שבפנים בדיוק 3 פעמים, לא פחות ולא יותר.</span></div>
 </div>
-<p>בדיוק כמו ב-MOVE, גם כאן חלים כללי היישור והגזירה: אם המשתמש מקליד יותר תווים מאורך המשתנה, העודף נגזר.</p>
-<div class="exercise">
+<h3 style="font-size:1.1rem;margin-top:1.6rem">PERFORM ... UNTIL — חזרה עד שתנאי מתקיים</h3>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>PERFORM UNTIL WS-COUNT &gt; 3
+    DISPLAY WS-COUNT
+    ADD 1 TO WS-COUNT
+END-PERFORM.</code></pre></div>
+<div class="explain">
+<div class="row"><code>PERFORM UNTIL WS-COUNT &amp;gt; 3</code><span>בודק את התנאי <b>לפני</b> כל חזרה — כשהוא מתקיים, הלולאה עוצרת.</span></div>
+<div class="row"><code>ADD 1 TO WS-COUNT</code><span>חובה לעדכן את המשתנה בתוך הלולאה, אחרת היא לעולם לא תיעצר (לולאה אינסופית).</span></div>
+</div>
+<div class="exercise" data-answer="3">
 <p class="q-label">תרגיל</p>
-<p class="q-body">מה תפקידה של DISPLAY בדרך כלל לפני שורת ACCEPT?</p>
+<p class="q-body">כמה פעמים תודפס המילה "HELLO" בלולאת ה-TIMES שלמעלה?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -56,7 +54,7 @@ PROCEDURE DIVISION.
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> להציג למשתמש הנחיה ברורה על מה שמצופה ממנו להקליד — ACCEPT עצמו לא מציג שום טקסט.</div>
+<div class="answer"><b>תשובה:</b> 3 פעמים.</div>
 </details>
 </div>
 
@@ -67,15 +65,15 @@ PROCEDURE DIVISION.
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson5.html" class="">→ שיעור קודם</a>
-      <a href="lesson7.html" class="">שיעור הבא ←</a>
+      <a href="lesson13.html" class="">→ שיעור קודם</a>
+      <a href="lesson15.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 6;</script>
+<script>window.__LESSON_NUM__ = 14;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 7 — ADD | COBOL Academy</title>
+<title>שיעור 4 — משתנים ו-PIC | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,37 +19,36 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON07 JOB (COBOL),'ADD',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 7 מתוך 10</p>
-    <h1>ADD</h1>
-    <p class="muted">חיבור ערכים — עם ובלי GIVING.</p>
+    <div class="jcl">// LESSON04 JOB (COBOL),'PICVARS',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 4 מתוך 17</p>
+    <h1>משתנים ו-PIC</h1>
+    <p class="muted">איך מגדירים נתונים ב-DATA DIVISION.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>ADD — חיבור ערכים</h2>
-<p>ל-ADD יש כמה צורות תחביר. הפשוטה ביותר מוסיפה ערך אחד ישירות לתוך משתנה קיים:</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-TOTAL   PIC 9(5) VALUE 100.
-
-PROCEDURE DIVISION.
-    ADD 50 TO WS-TOTAL.
-    DISPLAY WS-TOTAL.</code></pre></div>
+    <h2>PIC — תיאור צורת הנתון</h2>
+<p>כל משתנה ב-COBOL חייב הצהרת PIC (מקוצר מ-PICTURE) שקובעת איזה סוג נתון הוא מכיל, ובאיזה אורך. זה שונה מרוב השפות המודרניות: אין "int" או "string" — יש תיאור מדויק של הצורה.</p>
+<h3 style="font-size:1.1rem;margin-top:1.6rem">סימנים נפוצים</h3>
 <div class="explain">
-<div class="row"><code>ADD 50 TO WS-TOTAL.</code><span>מוסיף 50 לערך הקיים ב-WS-TOTAL. התוצאה (150) נשמרת חזרה באותו משתנה.</span></div>
+<div class="row"><code>9</code><span>ספרה מספרית. לדוגמה PIC 9(3) — מספר בן עד 3 ספרות (0–999).</span></div>
+<div class="row"><code>X</code><span>תו אלפאנומרי (טקסט חופשי). PIC X(10) — עד 10 תווים.</span></div>
+<div class="row"><code>V</code><span>נקודה עשרונית <b>משוערת</b> — לא נשמרת בפועל בזיכרון, רק מסמנת איפה היא.</span></div>
+<div class="row"><code>S</code><span>מסמן שהמספר יכול להיות שלילי (Signed).</span></div>
 </div>
-<p>כשלא רוצים לשנות את המשתנים המקוריים, משתמשים ב-GIVING, שמפריד בין המקורות לתוצאה:</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-A       PIC 9(5) VALUE 20.
-01  WS-B       PIC 9(5) VALUE 30.
-01  WS-SUM     PIC 9(5).
-
-PROCEDURE DIVISION.
-    ADD WS-A WS-B GIVING WS-SUM.
-    DISPLAY WS-SUM.</code></pre></div>
+<div class="codeblock"><pre><code>01  WS-QTY        PIC 9(3)      VALUE 0.
+01  WS-NAME       PIC X(15)     VALUE SPACES.
+01  WS-PRICE      PIC 9(5)V99   VALUE 0.
+01  WS-BALANCE    PIC S9(6)V99  VALUE 0.</code></pre></div>
 <div class="explain">
-<div class="row"><code>ADD WS-A WS-B GIVING WS-SUM.</code><span>מחבר את WS-A ו-WS-B, ושם את התוצאה (50) ב-WS-SUM — בלי לשנות את WS-A או WS-B.</span></div>
+<div class="row"><code>WS-QTY  PIC 9(3)</code><span>מספר שלם עד 3 ספרות — לדוגמה כמות פריטים.</span></div>
+<div class="row"><code>WS-NAME PIC X(15)</code><span>טקסט עד 15 תווים — VALUE SPACES מאתחל אותו לרווחים.</span></div>
+<div class="row"><code>WS-PRICE PIC 9(5)V99</code><span>מספר עם 5 ספרות שלמות ו-2 עשרוניות — לדוגמה 12345.67.</span></div>
+<div class="row"><code>WS-BALANCE PIC S9(6)V99</code><span>כמו למעלה, אך עם אפשרות לערך שלילי (יתרת חוב, למשל).</span></div>
 </div>
-<div class="exercise">
+<p>ה-01 שמופיע לפני כל שם משתנה הוא "רמת" ההגדרה (level number) — 01 מציין רמה עליונה. נרחיב על רמות בשיעורים מתקדמים יותר.</p>
+<div class="exercise" data-answer="3">
 <p class="q-label">תרגיל</p>
-<p class="q-body">אם WS-A=20 ו-WS-B=30, מה ההבדל בין <code style="direction:ltr">ADD WS-A TO WS-B</code> לבין <code style="direction:ltr">ADD WS-A WS-B GIVING WS-SUM</code>?</p>
+<p class="q-body">כמה ספרות עשרוניות יש למשתנה עם PIC 9(4)V999?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -57,7 +56,7 @@ PROCEDURE DIVISION.
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> הראשון משנה את WS-B עצמו לתוצאה (50) ומאבד את הערך המקורי שלו. השני משאיר את WS-A ו-WS-B ללא שינוי, ורק WS-SUM מקבל את התוצאה.</div>
+<div class="answer"><b>תשובה:</b> 3 ספרות עשרוניות (ו-4 ספרות שלמות) — סה״כ המספר יכול להיראות כמו 1234.567.</div>
 </details>
 </div>
 
@@ -68,15 +67,15 @@ PROCEDURE DIVISION.
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson6.html" class="">→ שיעור קודם</a>
-      <a href="lesson8.html" class="">שיעור הבא ←</a>
+      <a href="lesson3.html" class="">→ שיעור קודם</a>
+      <a href="lesson5.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 7;</script>
+<script>window.__LESSON_NUM__ = 4;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

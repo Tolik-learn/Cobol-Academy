@@ -1,82 +1,135 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 8 — SUBTRACT | COBOL Academy</title>
-<link rel="stylesheet" href="../assets/styles.css">
-</head>
-<body>
+// COBOL Academy — progress tracking (localStorage) + quiz logic
+const TOTAL_LESSONS = 17;
+const STORAGE_KEY = 'cobol-academy-progress';
 
-<header class="topbar">
-  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
-  <nav>
-    <a href="../index.html">בית</a>
-    <a href="lesson1.html" class="active">שיעורים</a>
-    <a href="../quizzes/quiz1.html">מבחנים</a>
-  </nav>
-</header>
+function getProgress(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function setLessonDone(n){
+  const p = getProgress();
+  p[n] = true;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+function countDone(){
+  const p = getProgress();
+  return Object.keys(p).filter(k => p[k]).length;
+}
 
-<main class="wrap">
-  <section class="lesson-header">
-    <div class="jcl">// LESSON08 JOB (COBOL),'SUBTRACT',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 8 מתוך 10</p>
-    <h1>SUBTRACT</h1>
-    <p class="muted">חיסור ערכים, וכיוון שחשוב לשים לב אליו.</p>
-  </section>
+// ---- home page: render progress meter + card states ----
+function initHome(){
+  const meterFill = document.querySelector('.meter-fill');
+  const pctLabel = document.querySelector('.pct');
+  const countLabel = document.querySelector('.count-label');
+  if(!meterFill) return;
+  const done = countDone();
+  const pct = Math.round((done / TOTAL_LESSONS) * 100);
+  meterFill.style.width = pct + '%';
+  if(pctLabel) pctLabel.textContent = pct + '%';
+  if(countLabel) countLabel.textContent = `${done} מתוך ${TOTAL_LESSONS} שיעורים הושלמו`;
 
-  <section style="padding-top:0">
-    <h2>SUBTRACT — חיסור ערכים</h2>
-<p>התחביר של SUBTRACT מקביל ל-ADD, אבל כיוון החיסור חשוב: התחביר קורא "הפחת X מ-Y".</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-STOCK   PIC 9(5) VALUE 100.
+  const progress = getProgress();
+  document.querySelectorAll('.card[data-lesson]').forEach(card => {
+    const n = card.getAttribute('data-lesson');
+    if(progress[n]) card.classList.add('done');
+  });
+}
 
-PROCEDURE DIVISION.
-    SUBTRACT 30 FROM WS-STOCK.
-    DISPLAY WS-STOCK.</code></pre></div>
-<div class="explain">
-<div class="row"><code>SUBTRACT 30 FROM WS-STOCK.</code><span>מפחית 30 מהערך הקיים ב-WS-STOCK. התוצאה (70) נשמרת חזרה באותו משתנה.</span></div>
-</div>
-<p>וכמובן, גם כאן אפשר להשתמש ב-GIVING כדי לשמור את המקורות ולקבל תוצאה במשתנה נפרד:</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-A       PIC 9(5) VALUE 100.
-01  WS-B       PIC 9(5) VALUE 30.
-01  WS-DIFF    PIC 9(5).
+// ---- lesson page: mark-complete button ----
+function initLesson(lessonNum){
+  const row = document.querySelector('.complete-row');
+  const btn = document.querySelector('.mark-done-btn');
+  if(!row || !btn) return;
+  const progress = getProgress();
+  if(progress[lessonNum]) row.classList.add('done');
+  btn.addEventListener('click', () => {
+    setLessonDone(lessonNum);
+    row.classList.add('done');
+  });
+}
 
-PROCEDURE DIVISION.
-    SUBTRACT WS-B FROM WS-A GIVING WS-DIFF.
-    DISPLAY WS-DIFF.</code></pre></div>
-<div class="explain">
-<div class="row"><code>SUBTRACT WS-B FROM WS-A GIVING WS-DIFF.</code><span>מחשב WS-A פחות WS-B (70) ושם את התוצאה ב-WS-DIFF, בלי לשנות את WS-A או WS-B.</span></div>
-</div>
-<div class="exercise">
-<p class="q-label">תרגיל</p>
-<p class="q-body">למה <code style="direction:ltr">SUBTRACT WS-A FROM WS-B</code> לא זהה ל-<code style="direction:ltr">SUBTRACT WS-B FROM WS-A</code>?</p>
-<div class="try-row">
-<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
-<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
-</div>
-<p class="feedback"></p>
-<details class="reveal">
-<summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> כי הכיוון קובע מי מחסירים ממי — FROM מציין את המשתנה שממנו מפחיתים. הפוך ביניהם ותקבלו תוצאה שונה (ולעיתים שלילית).</div>
-</details>
-</div>
+// ---- quiz page: single-answer selection with feedback ----
+function initQuiz(){
+  const items = document.querySelectorAll('.quiz-item');
+  if(!items.length) return;
+  const resultBox = document.querySelector('.quiz-result');
+  const answered = new Set();
 
+  items.forEach((item, idx) => {
+    const correct = item.getAttribute('data-correct');
+    item.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if(item.classList.contains('locked')) return;
+        item.classList.add('locked');
+        answered.add(idx);
+        const val = opt.getAttribute('data-value');
+        item.querySelectorAll('.opt').forEach(o => {
+          if(o.getAttribute('data-value') === correct) o.classList.add('correct');
+        });
+        if(val !== correct) opt.classList.add('wrong');
 
-    <div class="complete-row">
-      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
-      <span class="status">✓ השיעור סומן כהושלם</span>
-    </div>
+        if(answered.size === items.length){
+          let score = 0;
+          items.forEach(it => {
+            const c = it.getAttribute('data-correct');
+            if(it.querySelector(`.opt.wrong`) === null) score++;
+          });
+          if(resultBox){
+            resultBox.textContent = `הציון שלך: ${score} מתוך ${items.length}`;
+            resultBox.style.display = 'block';
+          }
+        }
+      }, { once: false });
+    });
+  });
+}
 
-    <div class="lesson-nav">
-      <a href="lesson7.html" class="">→ שיעור קודם</a>
-      <a href="lesson9.html" class="">שיעור הבא ←</a>
-    </div>
-  </section>
-</main>
+// ---- exercises: type-your-answer + check, then reveal full explanation ----
+function normalize(s){
+  return (s || '').trim().toUpperCase().replace(/\s+/g, ' ').replace(/["'.]/g, '');
+}
+function initExercises(){
+  document.querySelectorAll('.exercise').forEach(ex => {
+    const input = ex.querySelector('.try-input');
+    const btn = ex.querySelector('.try-btn');
+    const feedback = ex.querySelector('.feedback');
+    const reveal = ex.querySelector('.reveal');
+    const answer = ex.getAttribute('data-answer');
+    if(!input || !btn) return;
 
-<footer>COBOL ACADEMY © 2026</footer>
+    function check(){
+      const val = normalize(input.value);
+      if(!val){
+        feedback.textContent = 'הקלידו תשובה לפני שבודקים.';
+        feedback.className = 'feedback';
+        return;
+      }
+      if(answer){
+        if(val === normalize(answer)){
+          feedback.textContent = '✓ נכון!';
+          feedback.className = 'feedback ok';
+        }else{
+          feedback.textContent = '✗ לא מדויק — נסו שוב, או פתחו את ההסבר המלא למטה.';
+          feedback.className = 'feedback err';
+        }
+      }else{
+        feedback.textContent = 'עכשיו השוו את מה שכתבתם להסבר המלא למטה 👇';
+        feedback.className = 'feedback';
+        if(reveal) reveal.setAttribute('open', '');
+      }
+    }
+    btn.addEventListener('click', check);
+    input.addEventListener('keydown', e => {
+      if(e.key === 'Enter'){ e.preventDefault(); check(); }
+    });
+  });
+}
 
-<script>window.__LESSON_NUM__ = 8;</script>
-<script src="../assets/script.js"></script>
-</body>
-</html>
+document.addEventListener('DOMContentLoaded', () => {
+  initHome();
+  if(window.__LESSON_NUM__) initLesson(window.__LESSON_NUM__);
+  initQuiz();
+  initExercises();
+});

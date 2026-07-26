@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 11 — IF / ELSE | COBOL Academy</title>
+<title>שיעור 1 — מבוא ל-COBOL | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,31 +19,34 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON11 JOB (COBOL),'IFELSE',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 11 מתוך 10</p>
-    <h1>IF / ELSE</h1>
-    <p class="muted">איך תוכנית COBOL מקבלת החלטות.</p>
+    <div class="jcl">// LESSON01 JOB (COBOL),'INTRO',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 1 מתוך 17</p>
+    <h1>מבוא ל-COBOL</h1>
+    <p class="muted">מאיפה השפה הזו הגיעה, ולמה היא עדיין כאן.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>IF / ELSE — קבלת החלטות</h2>
-<p>עד עכשיו התוכניות שלנו רצו בקו ישר, שורה אחר שורה. IF הוא הצעד הראשון לקוד שמתנהג אחרת בהתאם לנתונים — ממש כמו בכל שפת תכנות אחרת.</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IF WS-AGE &gt; 18
-    DISPLAY "ADULT"
-ELSE
-    DISPLAY "MINOR"
-END-IF.</code></pre></div>
+    <h2>מהי COBOL?</h2>
+<p>COBOL (ר״ת <b>CO</b>mmon <b>B</b>usiness <b>O</b>riented <b>L</b>anguage) היא שפת תכנות שפותחה בשנת 1959 במטרה אחת ברורה: לתאר תהליכים עסקיים בשפה קרובה לאנגלית, כך שגם מי שאינו מתכנת מקצועי יוכל לקרוא את הקוד ולהבין מה הוא עושה.</p>
+<p>למרות גילה, COBOL עדיין מריצה חלק ניכר ממערכות הליבה של בנקים, חברות ביטוח, קרנות פנסיה ומוסדות ממשלתיים ברחבי העולם — פשוט כי המערכות האלה עובדות, יציבות, ואף אחד לא ממהר להחליף אותן.</p>
+<h2>התוכנית הראשונה שלכם</h2>
+<p>כל תוכנית COBOL בנויה מ־4 "חטיבות" (DIVISIONS) בסדר קבוע. בשיעור הבא נפרק אותן אחת-אחת. בינתיים, הנה תוכנית COBOL מלאה, קצרה ככל האפשר:</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO.
+
+PROCEDURE DIVISION.
+    DISPLAY "HELLO WORLD".
+    STOP RUN.</code></pre></div>
 <div class="explain">
-<div class="row"><code>IF WS-AGE &amp;gt; 18</code><span>בודק תנאי. אפשר להשתמש בסימנים (&gt; &lt; =) או במילים (GREATER THAN, LESS THAN).</span></div>
-<div class="row"><code>DISPLAY "ADULT"</code><span>מתבצע רק אם התנאי התקיים (TRUE).</span></div>
-<div class="row"><code>ELSE</code><span>מסמן את הענף החלופי — מה לעשות אם התנאי לא התקיים.</span></div>
-<div class="row"><code>DISPLAY "MINOR"</code><span>מתבצע רק אם התנאי לא התקיים (FALSE).</span></div>
-<div class="row"><code>END-IF.</code><span>סוגר את גוש התנאי. ב-COBOL מודרני זה חובה כדי למנוע בלבול לגבי היכן ה-IF נגמר.</span></div>
+<div class="row"><code>IDENTIFICATION DIVISION.</code><span>חובה בתחילת כל תוכנית — כאן מזהים אותה.</span></div>
+<div class="row"><code>PROGRAM-ID. HELLO.</code><span>השם של התוכנית — כאן היא נקראת HELLO.</span></div>
+<div class="row"><code>PROCEDURE DIVISION.</code><span>כאן מתחיל הקוד שבאמת <b>מתבצע</b> — הפעולות עצמן.</span></div>
+<div class="row"><code>DISPLAY "HELLO WORLD".</code><span>מדפיס את המחרוזת למסך. שימו לב לנקודה בסוף כל שורה — ב-COBOL היא חובה.</span></div>
+<div class="row"><code>STOP RUN.</code><span>מסמן לתוכנית לעצור. בלעדיו התוכנית לא תדע מתי היא הסתיימה.</span></div>
 </div>
-<p>ה-ELSE הוא אופציונלי — אפשר לכתוב IF בלי ELSE כלל, אם רוצים שרק יקרה משהו כשהתנאי אמיתי.</p>
-<div class="exercise" data-answer="MINOR">
+<div class="exercise" data-answer="MICHAL">
 <p class="q-label">תרגיל</p>
-<p class="q-body">אם WS-AGE שווה ל-15, מה תדפיס התוכנית שלמעלה?</p>
+<p class="q-body">מה תדפיס התוכנית הבאה?<br><code style="direction:ltr;display:inline-block">DISPLAY "MICHAL".</code></p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -51,7 +54,7 @@ END-IF.</code></pre></div>
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> MINOR — כי 15 אינו גדול מ-18, אז מתבצע הענף של ה-ELSE.</div>
+<div class="answer"><b>תשובה:</b> <code style="direction:ltr">MICHAL</code> — הפקודה DISPLAY פשוט מדפיסה בדיוק את מה שכתוב במרכאות.</div>
 </details>
 </div>
 
@@ -62,15 +65,15 @@ END-IF.</code></pre></div>
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson10.html" class="">→ שיעור קודם</a>
-      <a href="lesson12.html" class="">שיעור הבא ←</a>
+      <a href="#" class="disabled">→ שיעור קודם</a>
+      <a href="lesson2.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 11;</script>
+<script>window.__LESSON_NUM__ = 1;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

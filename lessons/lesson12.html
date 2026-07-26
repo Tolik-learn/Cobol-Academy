@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 12 — EVALUATE | COBOL Academy</title>
+<title>שיעור 17 — קבצים | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,32 +19,43 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON12 JOB (COBOL),'EVALUATE',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 12 מתוך 10</p>
-    <h1>EVALUATE</h1>
-    <p class="muted">בדיקת ערך מול כמה חלופות, בלי שרשרת IF ארוכה.</p>
+    <div class="jcl">// LESSON17 JOB (COBOL),'FILES',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 17 מתוך 17</p>
+    <h1>קבצים</h1>
+    <p class="muted">OPEN, READ, WRITE, CLOSE — איך COBOL עובד עם קבצים אמיתיים.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>EVALUATE — כשיש יותר משתי אפשרויות</h2>
-<p>לבדוק ערך מול הרבה חלופות עם שרשרת ארוכה של IF/ELSE זה מסורבל. EVALUATE היא ה"switch" של COBOL — קריאה ונקייה בהרבה למקרים כאלה.</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>EVALUATE WS-GRADE
-    WHEN "A"
-        DISPLAY "EXCELLENT"
-    WHEN "B"
-        DISPLAY "GOOD"
-    WHEN OTHER
-        DISPLAY "TRY AGAIN"
-END-EVALUATE.</code></pre></div>
+    <h2>קבצים — FILE SECTION ו-OPEN/READ/WRITE/CLOSE</h2>
+<p>רוב תוכניות ה-COBOL האמיתיות בעולם לא מדפיסות למסך — הן קוראות וכותבות לקבצים (או למסדי נתונים). זה דורש הגדרות בשלוש חטיבות שונות בו-זמנית.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>ENVIRONMENT DIVISION.
+FILE-CONTROL.
+    SELECT CUSTOMER-FILE ASSIGN TO "CUSTOMERS.DAT"
+        ORGANIZATION IS LINE SEQUENTIAL.
+
+DATA DIVISION.
+FILE SECTION.
+FD  CUSTOMER-FILE.
+01  CUSTOMER-RECORD    PIC X(50).
+
+PROCEDURE DIVISION.
+    OPEN INPUT CUSTOMER-FILE.
+    READ CUSTOMER-FILE
+        AT END DISPLAY "NO MORE RECORDS"
+    END-READ.
+    CLOSE CUSTOMER-FILE.</code></pre></div>
 <div class="explain">
-<div class="row"><code>EVALUATE WS-GRADE</code><span>המשתנה (או הביטוי) שאת ערכו בודקים.</span></div>
-<div class="row"><code>WHEN "A"</code><span>אם WS-GRADE שווה ל-A, מבצע את מה שמתחתיו ועובר הלאה — בלי "נפילה" לענפים הבאים.</span></div>
-<div class="row"><code>WHEN OTHER</code><span>ענף ברירת מחדל — מתבצע אם אף אחד מה-WHEN הקודמים לא התאים.</span></div>
-<div class="row"><code>END-EVALUATE.</code><span>סוגר את הגוש, בדיוק כמו END-IF.</span></div>
+<div class="row"><code>SELECT CUSTOMER-FILE ASSIGN TO ...</code><span>מקשר שם לוגי (CUSTOMER-FILE) לקובץ פיזי בדיסק.</span></div>
+<div class="row"><code>FD  CUSTOMER-FILE.</code><span>מתאר את מבנה הרשומה שבתוך הקובץ (FD = File Description).</span></div>
+<div class="row"><code>01  CUSTOMER-RECORD PIC X(50)</code><span>כל שורה בקובץ נקראת כטקסט של 50 תווים.</span></div>
+<div class="row"><code>OPEN INPUT CUSTOMER-FILE.</code><span>פותח את הקובץ לקריאה בלבד.</span></div>
+<div class="row"><code>READ CUSTOMER-FILE ... AT END ...</code><span>קורא רשומה אחת; אם הגיעו לסוף הקובץ, מבצע את מה שאחרי AT END.</span></div>
+<div class="row"><code>CLOSE CUSTOMER-FILE.</code><span>סוגר את הקובץ — חובה, גם כשמסיימים לקרוא.</span></div>
 </div>
-<div class="exercise" data-answer="GOOD">
+<p>שימו לב שהגדרת קובץ נוגעת בשלוש חטיבות: ENVIRONMENT (איפה הקובץ נמצא), DATA (איך רשומה בו נראית), ו-PROCEDURE (מה עושים איתו בפועל).</p>
+<div class="exercise">
 <p class="q-label">תרגיל</p>
-<p class="q-body">אם WS-GRADE שווה ל-"B", מה תדפיס התוכנית?</p>
+<p class="q-body">מה עלול לקרות אם מבצעים READ בלי סעיף AT END, והתוכנית מגיעה לסוף הקובץ?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -52,7 +63,7 @@ END-EVALUATE.</code></pre></div>
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> GOOD</div>
+<div class="answer"><b>תשובה:</b> בלי AT END אין דרך לתוכנית לדעת שהגיעה לסוף הקובץ בצורה מבוקרת — ברוב הקומפיילרים זה יגרום לשגיאת ריצה (abend) במקום להמשיך בצורה מסודרת.</div>
 </details>
 </div>
 
@@ -63,15 +74,15 @@ END-EVALUATE.</code></pre></div>
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson11.html" class="">→ שיעור קודם</a>
-      <a href="lesson13.html" class="">שיעור הבא ←</a>
+      <a href="lesson16.html" class="">→ שיעור קודם</a>
+      <a href="../quizzes/quiz1.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 12;</script>
+<script>window.__LESSON_NUM__ = 17;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

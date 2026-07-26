@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 1 — מבוא ל-COBOL | COBOL Academy</title>
+<title>שיעור 7 — ADD | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,34 +19,37 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON01 JOB (COBOL),'INTRO',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 1 מתוך 10</p>
-    <h1>מבוא ל-COBOL</h1>
-    <p class="muted">מאיפה השפה הזו הגיעה, ולמה היא עדיין כאן.</p>
+    <div class="jcl">// LESSON07 JOB (COBOL),'ADD',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 7 מתוך 17</p>
+    <h1>ADD</h1>
+    <p class="muted">חיבור ערכים — עם ובלי GIVING.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>מהי COBOL?</h2>
-<p>COBOL (ר״ת <b>CO</b>mmon <b>B</b>usiness <b>O</b>riented <b>L</b>anguage) היא שפת תכנות שפותחה בשנת 1959 במטרה אחת ברורה: לתאר תהליכים עסקיים בשפה קרובה לאנגלית, כך שגם מי שאינו מתכנת מקצועי יוכל לקרוא את הקוד ולהבין מה הוא עושה.</p>
-<p>למרות גילה, COBOL עדיין מריצה חלק ניכר ממערכות הליבה של בנקים, חברות ביטוח, קרנות פנסיה ומוסדות ממשלתיים ברחבי העולם — פשוט כי המערכות האלה עובדות, יציבות, ואף אחד לא ממהר להחליף אותן.</p>
-<h2>התוכנית הראשונה שלכם</h2>
-<p>כל תוכנית COBOL בנויה מ־4 "חטיבות" (DIVISIONS) בסדר קבוע. בשיעור הבא נפרק אותן אחת-אחת. בינתיים, הנה תוכנית COBOL מלאה, קצרה ככל האפשר:</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IDENTIFICATION DIVISION.
-PROGRAM-ID. HELLO.
+    <h2>ADD — חיבור ערכים</h2>
+<p>ל-ADD יש כמה צורות תחביר. הפשוטה ביותר מוסיפה ערך אחד ישירות לתוך משתנה קיים:</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-TOTAL   PIC 9(5) VALUE 100.
 
 PROCEDURE DIVISION.
-    DISPLAY "HELLO WORLD".
-    STOP RUN.</code></pre></div>
+    ADD 50 TO WS-TOTAL.
+    DISPLAY WS-TOTAL.</code></pre></div>
 <div class="explain">
-<div class="row"><code>IDENTIFICATION DIVISION.</code><span>חובה בתחילת כל תוכנית — כאן מזהים אותה.</span></div>
-<div class="row"><code>PROGRAM-ID. HELLO.</code><span>השם של התוכנית — כאן היא נקראת HELLO.</span></div>
-<div class="row"><code>PROCEDURE DIVISION.</code><span>כאן מתחיל הקוד שבאמת <b>מתבצע</b> — הפעולות עצמן.</span></div>
-<div class="row"><code>DISPLAY "HELLO WORLD".</code><span>מדפיס את המחרוזת למסך. שימו לב לנקודה בסוף כל שורה — ב-COBOL היא חובה.</span></div>
-<div class="row"><code>STOP RUN.</code><span>מסמן לתוכנית לעצור. בלעדיו התוכנית לא תדע מתי היא הסתיימה.</span></div>
+<div class="row"><code>ADD 50 TO WS-TOTAL.</code><span>מוסיף 50 לערך הקיים ב-WS-TOTAL. התוצאה (150) נשמרת חזרה באותו משתנה.</span></div>
 </div>
-<div class="exercise" data-answer="MICHAL">
+<p>כשלא רוצים לשנות את המשתנים המקוריים, משתמשים ב-GIVING, שמפריד בין המקורות לתוצאה:</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-A       PIC 9(5) VALUE 20.
+01  WS-B       PIC 9(5) VALUE 30.
+01  WS-SUM     PIC 9(5).
+
+PROCEDURE DIVISION.
+    ADD WS-A WS-B GIVING WS-SUM.
+    DISPLAY WS-SUM.</code></pre></div>
+<div class="explain">
+<div class="row"><code>ADD WS-A WS-B GIVING WS-SUM.</code><span>מחבר את WS-A ו-WS-B, ושם את התוצאה (50) ב-WS-SUM — בלי לשנות את WS-A או WS-B.</span></div>
+</div>
+<div class="exercise">
 <p class="q-label">תרגיל</p>
-<p class="q-body">מה תדפיס התוכנית הבאה?<br><code style="direction:ltr;display:inline-block">DISPLAY "MICHAL".</code></p>
+<p class="q-body">אם WS-A=20 ו-WS-B=30, מה ההבדל בין <code style="direction:ltr">ADD WS-A TO WS-B</code> לבין <code style="direction:ltr">ADD WS-A WS-B GIVING WS-SUM</code>?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -54,7 +57,7 @@ PROCEDURE DIVISION.
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> <code style="direction:ltr">MICHAL</code> — הפקודה DISPLAY פשוט מדפיסה בדיוק את מה שכתוב במרכאות.</div>
+<div class="answer"><b>תשובה:</b> הראשון משנה את WS-B עצמו לתוצאה (50) ומאבד את הערך המקורי שלו. השני משאיר את WS-A ו-WS-B ללא שינוי, ורק WS-SUM מקבל את התוצאה.</div>
 </details>
 </div>
 
@@ -65,15 +68,15 @@ PROCEDURE DIVISION.
     </div>
 
     <div class="lesson-nav">
-      <a href="#" class="disabled">→ שיעור קודם</a>
-      <a href="lesson2.html" class="">שיעור הבא ←</a>
+      <a href="lesson6.html" class="">→ שיעור קודם</a>
+      <a href="lesson8.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 1;</script>
+<script>window.__LESSON_NUM__ = 7;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

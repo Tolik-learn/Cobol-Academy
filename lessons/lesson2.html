@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 2 — מבנה תוכנית COBOL | COBOL Academy</title>
+<title>שיעור 8 — SUBTRACT | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,43 +19,37 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON02 JOB (COBOL),'STRUCT',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 2 מתוך 10</p>
-    <h1>מבנה תוכנית COBOL</h1>
-    <p class="muted">ארבע חטיבות, סדר קבוע, תפקיד ברור לכל אחת.</p>
+    <div class="jcl">// LESSON08 JOB (COBOL),'SUBTRACT',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 8 מתוך 17</p>
+    <h1>SUBTRACT</h1>
+    <p class="muted">חיסור ערכים, וכיוון שחשוב לשים לב אליו.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>ארבע ה-DIVISIONS</h2>
-<p>כל תוכנית COBOL בנויה מארבע חטיבות, תמיד באותו סדר. לא כולן חובה בכל תוכנית, אבל הסדר ביניהן — כן קבוע:</p>
-<div class="explain">
-<div class="row"><code>IDENTIFICATION DIVISION</code><span>מי אני — שם התוכנית ופרטים מזהים. חטיבת חובה.</span></div>
-<div class="row"><code>ENVIRONMENT DIVISION</code><span>באיזו סביבה התוכנית רצה — חומרה, קבצים חיצוניים. לרוב לא נדרשת בתרגילים בסיסיים.</span></div>
-<div class="row"><code>DATA DIVISION</code><span>אילו משתנים ונתונים התוכנית משתמשת בהם — כאן מגדירים אותם לפני השימוש.</span></div>
-<div class="row"><code>PROCEDURE DIVISION</code><span>מה התוכנית בפועל <b>עושה</b> — רצף הפקודות שמתבצע.</span></div>
-</div>
-<h3 style="font-size:1.1rem;margin-top:1.6rem">שלד תוכנית מלא</h3>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IDENTIFICATION DIVISION.
-PROGRAM-ID. GREETING.
-
-ENVIRONMENT DIVISION.
-
-DATA DIVISION.
-WORKING-STORAGE SECTION.
-01  WS-NAME       PIC X(10) VALUE "STUDENT".
+    <h2>SUBTRACT — חיסור ערכים</h2>
+<p>התחביר של SUBTRACT מקביל ל-ADD, אבל כיוון החיסור חשוב: התחביר קורא "הפחת X מ-Y".</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-STOCK   PIC 9(5) VALUE 100.
 
 PROCEDURE DIVISION.
-    DISPLAY "HELLO, " WS-NAME.
-    STOP RUN.</code></pre></div>
+    SUBTRACT 30 FROM WS-STOCK.
+    DISPLAY WS-STOCK.</code></pre></div>
 <div class="explain">
-<div class="row"><code>WORKING-STORAGE SECTION.</code><span>חלק בתוך ה-DATA DIVISION שבו מגדירים משתנים זמניים לשימוש התוכנית.</span></div>
-<div class="row"><code>01  WS-NAME       PIC X(10) VALUE "STUDENT".</code><span>מגדיר משתנה בשם WS-NAME, מסוג טקסט (X) באורך 10 תווים, עם ערך התחלתי.</span></div>
-<div class="row"><code>DISPLAY "HELLO, " WS-NAME.</code><span>מדפיס טקסט קבוע ומיד אחריו את תוכן המשתנה — אפשר לשרשר כמה איברים ב-DISPLAY אחד.</span></div>
+<div class="row"><code>SUBTRACT 30 FROM WS-STOCK.</code><span>מפחית 30 מהערך הקיים ב-WS-STOCK. התוצאה (70) נשמרת חזרה באותו משתנה.</span></div>
 </div>
-<p>שימו לב: <b>DATA DIVISION</b> ו-<b>PROCEDURE DIVISION</b> הן החטיבות שבהן תבלו הכי הרבה זמן — כל שיעורי ההמשך מתמקדים בהן.</p>
-<div class="exercise" data-answer="PROCEDURE DIVISION">
+<p>וכמובן, גם כאן אפשר להשתמש ב-GIVING כדי לשמור את המקורות ולקבל תוצאה במשתנה נפרד:</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-A       PIC 9(5) VALUE 100.
+01  WS-B       PIC 9(5) VALUE 30.
+01  WS-DIFF    PIC 9(5).
+
+PROCEDURE DIVISION.
+    SUBTRACT WS-B FROM WS-A GIVING WS-DIFF.
+    DISPLAY WS-DIFF.</code></pre></div>
+<div class="explain">
+<div class="row"><code>SUBTRACT WS-B FROM WS-A GIVING WS-DIFF.</code><span>מחשב WS-A פחות WS-B (70) ושם את התוצאה ב-WS-DIFF, בלי לשנות את WS-A או WS-B.</span></div>
+</div>
+<div class="exercise">
 <p class="q-label">תרגיל</p>
-<p class="q-body">לפי הסדר הקבוע, אילו חטיבה באה מיד <b>אחרי</b> ה-DATA DIVISION?</p>
+<p class="q-body">למה <code style="direction:ltr">SUBTRACT WS-A FROM WS-B</code> לא זהה ל-<code style="direction:ltr">SUBTRACT WS-B FROM WS-A</code>?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -63,7 +57,7 @@ PROCEDURE DIVISION.
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> PROCEDURE DIVISION — שם נמצא הקוד שמתבצע בפועל.</div>
+<div class="answer"><b>תשובה:</b> כי הכיוון קובע מי מחסירים ממי — FROM מציין את המשתנה שממנו מפחיתים. הפוך ביניהם ותקבלו תוצאה שונה (ולעיתים שלילית).</div>
 </details>
 </div>
 
@@ -74,15 +68,15 @@ PROCEDURE DIVISION.
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson1.html" class="">→ שיעור קודם</a>
-      <a href="lesson3.html" class="">שיעור הבא ←</a>
+      <a href="lesson7.html" class="">→ שיעור קודם</a>
+      <a href="lesson9.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 2;</script>
+<script>window.__LESSON_NUM__ = 8;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

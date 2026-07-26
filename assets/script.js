@@ -1,291 +1,135 @@
-/* ============================================================
-   COBOL ACADEMY — design tokens
-   Palette: warm mainframe-shell dark + IBM-terminal amber glow
-   + punch-card cream for content surfaces.
-   Display/code face: IBM Plex Mono (IBM's own type — the
-   company that built the machines COBOL ran on).
-   Body face: Heebo (clean, warm, humane counterweight to the
-   rigidity of the terminal world).
-   ============================================================ */
+// COBOL Academy — progress tracking (localStorage) + quiz logic
+const TOTAL_LESSONS = 17;
+const STORAGE_KEY = 'cobol-academy-progress';
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Heebo:wght@300;400;500;600;700;800&display=swap');
-
-:root{
-  --void:        #171310;
-  --panel:       #1f1a14;
-  --panel-2:     #262019;
-  --amber:       #ffb000;
-  --amber-dim:   #b8790a;
-  --amber-soft:  rgba(255,176,0,.14);
-  --cream:       #ede6d3;
-  --cream-2:     #e2d9c0;
-  --ink:         #2b2620;
-  --ink-soft:    #55493a;
-  --text:        #e8dfc9;
-  --text-muted:  #93876d;
-  --ok:          #6fae63;
-  --err:         #c1543f;
-  --line:        #3a3227;
-
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --body: 'Heebo', system-ui, sans-serif;
+function getProgress(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function setLessonDone(n){
+  const p = getProgress();
+  p[n] = true;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+function countDone(){
+  const p = getProgress();
+  return Object.keys(p).filter(k => p[k]).length;
 }
 
-*{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+// ---- home page: render progress meter + card states ----
+function initHome(){
+  const meterFill = document.querySelector('.meter-fill');
+  const pctLabel = document.querySelector('.pct');
+  const countLabel = document.querySelector('.count-label');
+  if(!meterFill) return;
+  const done = countDone();
+  const pct = Math.round((done / TOTAL_LESSONS) * 100);
+  meterFill.style.width = pct + '%';
+  if(pctLabel) pctLabel.textContent = pct + '%';
+  if(countLabel) countLabel.textContent = `${done} מתוך ${TOTAL_LESSONS} שיעורים הושלמו`;
 
-body{
-  margin: 0;
-  background: var(--void);
-  background-image:
-    radial-gradient(ellipse at top left, rgba(255,176,0,.05), transparent 60%),
-    repeating-linear-gradient(180deg, rgba(255,255,255,.012) 0px, transparent 1px, transparent 3px);
-  color: var(--text);
-  font-family: var(--body);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-}
-
-a{ color: inherit; }
-:focus-visible{ outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
-
-/* ---------- top bar ---------- */
-.topbar{
-  position: sticky; top: 0; z-index: 40;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding: .9rem 1.4rem;
-  background: rgba(23,19,16,.86);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-}
-.topbar .brand{
-  font-family: var(--mono); font-weight: 600; letter-spacing: .02em;
-  font-size: 1.05rem; color: var(--amber); text-decoration: none;
-  display: flex; align-items: center; gap: .5rem;
-}
-.brand .dot{
-  width: .55rem; height: .55rem; border-radius: 50%;
-  background: var(--amber); box-shadow: 0 0 8px 2px var(--amber-soft);
-  animation: blink 2.6s steps(1) infinite;
-}
-@keyframes blink{ 0%,100%{opacity:1} 50%{opacity:.25} }
-
-.topbar nav{ display: flex; gap: 1.4rem; font-family: var(--mono); font-size: .88rem; }
-.topbar nav a{ text-decoration: none; color: var(--text-muted); padding: .3rem .1rem; border-bottom: 2px solid transparent; }
-.topbar nav a:hover, .topbar nav a.active{ color: var(--amber); border-color: var(--amber); }
-
-/* ---------- layout helpers ---------- */
-.wrap{ max-width: 980px; margin: 0 auto; padding: 0 1.4rem; }
-section{ padding: 3.2rem 0; }
-.eyebrow{
-  font-family: var(--mono); color: var(--amber-dim); font-size: .78rem;
-  letter-spacing: .12em; text-transform: uppercase; margin: 0 0 .6rem;
-}
-h1,h2,h3{ font-family: var(--body); font-weight: 800; margin: 0 0 .6rem; color: var(--text); }
-h1{ font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.15; }
-h2{ font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
-p{ margin: 0 0 1rem; }
-.muted{ color: var(--text-muted); }
-
-/* ---------- hero / terminal boot ---------- */
-.hero{ padding: 4.5rem 0 3rem; }
-.terminal{
-  background: #0f0c09;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 1.3rem 1.5rem;
-  font-family: var(--mono);
-  font-size: .92rem;
-  color: var(--amber);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.4), 0 20px 50px -20px rgba(255,176,0,.15);
-  direction: ltr; text-align: left;
-  overflow: hidden;
-}
-.terminal .line{ white-space: pre; opacity: 0; animation: reveal .4s forwards; }
-.terminal .line.l1{ animation-delay: .1s }
-.terminal .line.l2{ animation-delay: .5s }
-.terminal .line.l3{ animation-delay: .9s }
-.terminal .line.l4{ animation-delay: 1.3s }
-.terminal .line.l5{ animation-delay: 1.7s; color: var(--text); }
-@keyframes reveal{ to{ opacity: 1; } }
-.cursor{ display:inline-block; width:.55em; height:1em; background:var(--amber); vertical-align:-.15em; animation: blink 1s steps(1) infinite; }
-
-.hero-title{ margin-top: 2rem; }
-.hero-sub{ font-size: 1.08rem; max-width: 56ch; }
-.cta-row{ display:flex; gap: 1rem; margin-top: 1.6rem; flex-wrap: wrap; }
-.btn{
-  font-family: var(--mono); font-weight: 600; font-size: .92rem;
-  padding: .75rem 1.3rem; border-radius: 6px; text-decoration: none;
-  display: inline-flex; align-items: center; gap: .5rem; border: 1px solid transparent;
-  cursor: pointer;
-}
-.btn-primary{ background: var(--amber); color: #1a1300; }
-.btn-primary:hover{ filter: brightness(1.08); }
-.btn-ghost{ border-color: var(--line); color: var(--text); background: transparent; }
-.btn-ghost:hover{ border-color: var(--amber-dim); color: var(--amber); }
-
-/* ---------- progress ---------- */
-.progress-panel{
-  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
-  padding: 1.4rem 1.6rem;
-}
-.progress-top{ display:flex; justify-content: space-between; align-items:baseline; font-family: var(--mono); }
-.progress-top .pct{ font-size: 1.6rem; color: var(--amber); }
-.meter{
-  margin-top: .8rem; height: 10px; border-radius: 5px; background: var(--panel-2);
-  border: 1px solid var(--line); overflow: hidden;
-}
-.meter-fill{ height: 100%; background: linear-gradient(90deg, var(--amber-dim), var(--amber)); width: 0%; transition: width .5s ease; }
-
-/* ---------- punch-card lesson tiles ---------- */
-.grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.1rem; margin-top: 1.6rem; }
-
-.card{
-  position: relative;
-  background: var(--cream);
-  color: var(--ink);
-  text-decoration: none;
-  padding: 1.5rem 1.2rem 1.2rem;
-  clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%, 0 26px);
-  border: 1px solid var(--ink-soft);
-  display: flex; flex-direction: column; gap: .5rem;
-  min-height: 150px;
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.card::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:7px;
-  background-image: repeating-linear-gradient(to right, var(--ink-soft) 0 2px, transparent 2px 9px);
-  opacity:.55;
-}
-.card:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px -14px rgba(0,0,0,.5); }
-.card .num{ font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); letter-spacing: .06em; }
-.card .title{ font-weight: 700; font-size: 1.02rem; }
-.card .stat{ margin-top: auto; font-family: var(--mono); font-size: .74rem; color: var(--ink-soft); }
-.card.done{ background: var(--cream-2); }
-.card.done .stat{ color: #3d6b3f; }
-.card.done::after{
-  content: "✓ הושלם";
-  position: absolute; bottom: .9rem; left: 1.1rem;
-  font-family: var(--mono); font-size: .72rem; color: #3d6b3f; font-weight: 600;
-}
-.card.quiz{ background: var(--panel-2); color: var(--text); border-color: var(--line); }
-.card.quiz::before{ background-image: repeating-linear-gradient(to right, var(--amber-dim) 0 2px, transparent 2px 9px); }
-.card.quiz .num, .card.quiz .stat{ color: var(--text-muted); }
-
-/* ---------- lesson page ---------- */
-.jcl{
-  font-family: var(--mono); font-size: .78rem; color: var(--amber-dim);
-  border: 1px dashed var(--line); border-radius: 6px; padding: .7rem 1rem;
-  margin-bottom: 1.6rem; direction: ltr; text-align: left; overflow-x: auto; line-height: 1.6;
-}
-.lesson-header{ padding: 2.6rem 0 1rem; }
-.lesson-nav{
-  display:flex; justify-content: space-between; margin: 2.4rem 0 0;
-  font-family: var(--mono); font-size: .85rem;
-}
-.lesson-nav a{ text-decoration:none; color: var(--text-muted); }
-.lesson-nav a:hover{ color: var(--amber); }
-.lesson-nav a.disabled{ pointer-events:none; opacity:.3; }
-
-.codeblock{ margin: 1.2rem 0 1.6rem; }
-.ruler{
-  position: relative; height: 1.1rem; font-family: var(--mono); font-size: .62rem;
-  color: var(--amber-dim); direction: ltr;
-}
-.ruler .mark{ position:absolute; top:0; }
-.ruler .mark.a{ left: 7ch; } /* Area A begins column 8 */
-.ruler .mark.b{ left: 11ch; } /* Area B begins column 12 */
-.ruler .mark::before{ content:"│"; display:block; }
-pre{
-  margin: 0; direction: ltr; text-align: left;
-  background: #0f0c09; border: 1px solid var(--line); border-radius: 0 0 8px 8px;
-  padding: 1rem 1.2rem; overflow-x: auto;
-}
-code{ font-family: var(--mono); font-size: .88rem; color: #f2e6c9; line-height: 1.7; }
-.tok-div{ color: var(--amber); font-weight:600; }
-.tok-str{ color: #9fd08a; }
-.tok-kw{ color: #8fc7e8; }
-.tok-comment{ color: var(--text-muted); font-style: italic; }
-
-/* ---------- explanation table (line-by-line) ---------- */
-.explain{ display:flex; flex-direction:column; gap: .5rem; margin: 1.2rem 0 1.8rem; }
-.explain .row{
-  display:grid; grid-template-columns: minmax(140px,220px) 1fr; gap: 1rem;
-  padding: .55rem .8rem; border-radius: 6px; background: var(--panel);
-  border: 1px solid var(--line); align-items:center;
-}
-.explain code{ font-size: .82rem; color: var(--amber); direction: ltr; text-align: left; }
-.explain span{ color: var(--text); font-size: .92rem; }
-
-/* ---------- exercise: question visible, answer hidden behind its own toggle ---------- */
-.exercise{
-  background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
-  padding: 1.1rem 1.3rem; margin: 1.6rem 0;
-}
-.exercise .q-label{
-  font-family: var(--mono); color: var(--amber); font-weight: 600;
-  font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .5rem;
-}
-.exercise .q-body{ margin: 0; }
-.exercise .q-body code{ font-size: .88rem; }
-
-.try-row{
-  display:flex; gap:.6rem; margin-top:1rem; flex-wrap:wrap; align-items:center;
-  background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px;
-  padding: .7rem .8rem;
-}
-.try-input{
-  flex: 1 1 220px; font-family: var(--mono); font-size: .9rem;
-  background: #0f0c09; border: 1.5px solid var(--amber-dim); border-radius: 6px;
-  padding: .6rem .8rem; color: var(--text); direction: ltr; text-align: left;
-}
-.try-input::placeholder{ color: var(--text-muted); opacity: 1; }
-.try-input:focus{ border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber-soft); }
-.try-btn{ padding: .6rem 1.2rem; font-size: .84rem; white-space: nowrap; }
-.feedback{ margin: .7rem 0 0; font-family: var(--mono); font-size: .85rem; min-height: 1.2em; }
-.feedback.ok{ color: var(--ok); }
-.feedback.err{ color: var(--err); }
-
-details.reveal{ margin-top: 1rem; }
-details.reveal summary{
-  cursor: pointer; font-family: var(--mono); color: var(--amber-dim);
-  font-weight: 600; font-size: .84rem; list-style: none; user-select: none;
-}
-details.reveal summary::-webkit-details-marker{ display:none; }
-details.reveal summary::before{ content:"▸ "; }
-details.reveal[open] summary::before{ content:"▾ "; }
-.answer{ margin-top: .9rem; padding-top: .9rem; border-top: 1px dashed var(--line); }
-
-.complete-row{ margin: 2.2rem 0; display:flex; align-items:center; gap: 1rem; flex-wrap: wrap; }
-.complete-row .status{ font-family: var(--mono); font-size: .85rem; color: var(--ok); display:none; }
-.complete-row.done .status{ display:inline; }
-.complete-row.done .btn-primary{ display:none; }
-
-/* ---------- quiz page ---------- */
-.quiz-item{
-  background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
-  padding: 1.3rem 1.4rem; margin-bottom: 1.1rem;
-}
-.quiz-item .q{ font-weight: 600; margin-bottom: .9rem; }
-.quiz-item .code-q{ direction: ltr; text-align: left; }
-.opts{ display:flex; flex-direction:column; gap: .55rem; }
-.opt{
-  display:flex; align-items:center; gap:.7rem; padding:.6rem .8rem; border-radius:6px;
-  border: 1px solid var(--line); cursor:pointer; font-size:.94rem; background: var(--panel-2);
-}
-.opt:hover{ border-color: var(--amber-dim); }
-.opt.correct{ border-color: var(--ok); background: rgba(111,174,99,.12); }
-.opt.wrong{ border-color: var(--err); background: rgba(193,84,63,.12); }
-.opt input{ accent-color: var(--amber); }
-.quiz-result{
-  margin-top: 1.6rem; font-family: var(--mono); font-size: 1.1rem; color: var(--amber);
+  const progress = getProgress();
+  document.querySelectorAll('.card[data-lesson]').forEach(card => {
+    const n = card.getAttribute('data-lesson');
+    if(progress[n]) card.classList.add('done');
+  });
 }
 
-footer{
-  border-top: 1px solid var(--line); padding: 2rem 0; margin-top: 2rem;
-  font-family: var(--mono); font-size: .8rem; color: var(--text-muted); text-align:center;
+// ---- lesson page: mark-complete button ----
+function initLesson(lessonNum){
+  const row = document.querySelector('.complete-row');
+  const btn = document.querySelector('.mark-done-btn');
+  if(!row || !btn) return;
+  const progress = getProgress();
+  if(progress[lessonNum]) row.classList.add('done');
+  btn.addEventListener('click', () => {
+    setLessonDone(lessonNum);
+    row.classList.add('done');
+  });
 }
+
+// ---- quiz page: single-answer selection with feedback ----
+function initQuiz(){
+  const items = document.querySelectorAll('.quiz-item');
+  if(!items.length) return;
+  const resultBox = document.querySelector('.quiz-result');
+  const answered = new Set();
+
+  items.forEach((item, idx) => {
+    const correct = item.getAttribute('data-correct');
+    item.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if(item.classList.contains('locked')) return;
+        item.classList.add('locked');
+        answered.add(idx);
+        const val = opt.getAttribute('data-value');
+        item.querySelectorAll('.opt').forEach(o => {
+          if(o.getAttribute('data-value') === correct) o.classList.add('correct');
+        });
+        if(val !== correct) opt.classList.add('wrong');
+
+        if(answered.size === items.length){
+          let score = 0;
+          items.forEach(it => {
+            const c = it.getAttribute('data-correct');
+            if(it.querySelector(`.opt.wrong`) === null) score++;
+          });
+          if(resultBox){
+            resultBox.textContent = `הציון שלך: ${score} מתוך ${items.length}`;
+            resultBox.style.display = 'block';
+          }
+        }
+      }, { once: false });
+    });
+  });
+}
+
+// ---- exercises: type-your-answer + check, then reveal full explanation ----
+function normalize(s){
+  return (s || '').trim().toUpperCase().replace(/\s+/g, ' ').replace(/["'.]/g, '');
+}
+function initExercises(){
+  document.querySelectorAll('.exercise').forEach(ex => {
+    const input = ex.querySelector('.try-input');
+    const btn = ex.querySelector('.try-btn');
+    const feedback = ex.querySelector('.feedback');
+    const reveal = ex.querySelector('.reveal');
+    const answer = ex.getAttribute('data-answer');
+    if(!input || !btn) return;
+
+    function check(){
+      const val = normalize(input.value);
+      if(!val){
+        feedback.textContent = 'הקלידו תשובה לפני שבודקים.';
+        feedback.className = 'feedback';
+        return;
+      }
+      if(answer){
+        if(val === normalize(answer)){
+          feedback.textContent = '✓ נכון!';
+          feedback.className = 'feedback ok';
+        }else{
+          feedback.textContent = '✗ לא מדויק — נסו שוב, או פתחו את ההסבר המלא למטה.';
+          feedback.className = 'feedback err';
+        }
+      }else{
+        feedback.textContent = 'עכשיו השוו את מה שכתבתם להסבר המלא למטה 👇';
+        feedback.className = 'feedback';
+        if(reveal) reveal.setAttribute('open', '');
+      }
+    }
+    btn.addEventListener('click', check);
+    input.addEventListener('keydown', e => {
+      if(e.key === 'Enter'){ e.preventDefault(); check(); }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initHome();
+  if(window.__LESSON_NUM__) initLesson(window.__LESSON_NUM__);
+  initQuiz();
+  initExercises();
+});

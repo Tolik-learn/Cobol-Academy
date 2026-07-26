@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 12 — EVALUATE | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON12 JOB (COBOL),'EVALUATE',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 12 מתוך 17</p>
+    <h1>EVALUATE</h1>
+    <p class="muted">בדיקת ערך מול כמה חלופות, בלי שרשרת IF ארוכה.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>EVALUATE — כשיש יותר משתי אפשרויות</h2>
+<p>לבדוק ערך מול הרבה חלופות עם שרשרת ארוכה של IF/ELSE זה מסורבל. EVALUATE היא ה"switch" של COBOL — קריאה ונקייה בהרבה למקרים כאלה.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>EVALUATE WS-GRADE
+    WHEN "A"
+        DISPLAY "EXCELLENT"
+    WHEN "B"
+        DISPLAY "GOOD"
+    WHEN OTHER
+        DISPLAY "TRY AGAIN"
+END-EVALUATE.</code></pre></div>
+<div class="explain">
+<div class="row"><code>EVALUATE WS-GRADE</code><span>המשתנה (או הביטוי) שאת ערכו בודקים.</span></div>
+<div class="row"><code>WHEN "A"</code><span>אם WS-GRADE שווה ל-A, מבצע את מה שמתחתיו ועובר הלאה — בלי "נפילה" לענפים הבאים.</span></div>
+<div class="row"><code>WHEN OTHER</code><span>ענף ברירת מחדל — מתבצע אם אף אחד מה-WHEN הקודמים לא התאים.</span></div>
+<div class="row"><code>END-EVALUATE.</code><span>סוגר את הגוש, בדיוק כמו END-IF.</span></div>
+</div>
+<div class="exercise" data-answer="GOOD">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם WS-GRADE שווה ל-"B", מה תדפיס התוכנית?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> GOOD</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson11.html" class="">→ שיעור קודם</a>
+      <a href="lesson13.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 12;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

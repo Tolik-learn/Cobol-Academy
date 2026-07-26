@@ -3,161 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COBOL Academy — לימוד COBOL מהיסוד</title>
-<link rel="stylesheet" href="assets/styles.css">
+<title>שיעור 3 — DISPLAY ו-MOVE | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
 
 <header class="topbar">
-  <a href="index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
   <nav>
-    <a href="index.html" class="active">בית</a>
-    <a href="lessons/lesson1.html">שיעורים</a>
-    <a href="quizzes/quiz1.html">מבחנים</a>
-    <a href="#progress-section">התקדמות</a>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
   </nav>
 </header>
 
 <main class="wrap">
-
-  <section class="hero">
-    <div class="terminal" aria-hidden="true">
-      <div class="line l1">READY</div>
-      <div class="line l2">// JOB (COBOL),'STUDENT',CLASS=A</div>
-      <div class="line l3">// EXEC COBOL</div>
-      <div class="line l4">DISPLAY "SYSTEM ONLINE — 1959–PRESENT".</div>
-      <div class="line l5">&gt; <span class="cursor"></span></div>
-    </div>
-
-    <div class="hero-title">
-      <p class="eyebrow">מבוא מעשי לשפת התכנות העסקית הכי ותיקה שעדיין בשימוש</p>
-      <h1>לימוד COBOL, שורה אחר שורה</h1>
-      <p class="hero-sub muted">
-        COBOL מריצה עד היום את רוב מערכות הבנקים, הביטוח והממשלה בעולם.
-        כאן תלמדו אותה מהבסיס — עם דוגמאות קוד אמיתיות, תרגילים קצרים,
-        ומעקב התקדמות אישי.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="lessons/lesson1.html">התחל בשיעור 1 ←</a>
-        <a class="btn btn-ghost" href="quizzes/quiz1.html">קפוץ למבחן</a>
-      </div>
-    </div>
+  <section class="lesson-header">
+    <div class="jcl">// LESSON03 JOB (COBOL),'DISPMOVE',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 3 מתוך 17</p>
+    <h1>DISPLAY ו-MOVE</h1>
+    <p class="muted">שתי הפקודות שתשתמשו בהן הכי הרבה.</p>
   </section>
 
-  <section id="progress-section">
-    <div class="eyebrow">מעקב התקדמות</div>
-    <div class="progress-panel">
-      <div class="progress-top">
-        <span class="count-label">0 מתוך 17 שיעורים הושלמו</span>
-        <span class="pct">0%</span>
-      </div>
-      <div class="meter"><div class="meter-fill"></div></div>
+  <section style="padding-top:0">
+    <h2>DISPLAY — הצגת נתונים</h2>
+<p>את DISPLAY כבר פגשתם — היא הדרך הפשוטה ביותר להוציא טקסט או ערך של משתנה למסך. אפשר להעביר לה כמה איברים ברצף, והם יודפסו זה אחרי זה ללא רווח אוטומטי ביניהם.</p>
+<h2>MOVE — העברת ערכים</h2>
+<p>MOVE היא אחת הפקודות הנפוצות ביותר ב-COBOL. היא מעתיקה ערך ממקור ליעד — יכול להיות ערך קבוע (ליטרל), או תוכן של משתנה אחר.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>MOVE "TOLIK" TO WS-NAME.
+DISPLAY "USER: " WS-NAME.</code></pre></div>
+<div class="explain">
+<div class="row"><code>MOVE "TOLIK" TO WS-NAME.</code><span>מעתיק את המחרוזת TOLIK אל תוך המשתנה WS-NAME.</span></div>
+<div class="row"><code>DISPLAY "USER: " WS-NAME.</code><span>מדפיס: USER: TOLIK — הטקסט הקבוע ואז תוכן המשתנה שהעתקנו אליו.</span></div>
+</div>
+<p>תחביר כללי: <code style="direction:ltr">MOVE מקור TO יעד.</code> — שימו לב לכיוון: קודם המקור, אחר כך היעד, בדיוק הפוך מ"=" בשפות אחרות.</p>
+<div class="exercise" data-answer="HI DANA">
+<p class="q-label">תרגיל</p>
+<p class="q-body">מה יודפס? <code style="direction:ltr;display:inline-block;white-space:pre-line">MOVE "DANA" TO WS-NAME. DISPLAY "HI " WS-NAME.</code></p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> <code style="direction:ltr">HI DANA</code></div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson2.html" class="">→ שיעור קודם</a>
+      <a href="lesson4.html" class="">שיעור הבא ←</a>
     </div>
   </section>
-
-  <section>
-    <div class="eyebrow">17 שיעורים</div>
-    <h2>מסלול הלימוד</h2>
-    <p class="muted">כל שיעור הוא כרטיס מחורר משלו — פותחים אותו, לומדים, ומסמנים כהושלם.</p>
-
-    <div class="grid">
-      <a class="card" data-lesson="1" href="lessons/lesson1.html">
-        <span class="num">LESSON 01</span>
-        <span class="title">מבוא ל-COBOL</span>
-        <span class="stat">היסטוריה ולמה זה עדיין רץ</span>
-      </a>
-      <a class="card" data-lesson="2" href="lessons/lesson2.html">
-        <span class="num">LESSON 02</span>
-        <span class="title">מבנה תוכנית COBOL</span>
-        <span class="stat">ארבע ה-DIVISIONS</span>
-      </a>
-      <a class="card" data-lesson="3" href="lessons/lesson3.html">
-        <span class="num">LESSON 03</span>
-        <span class="title">DISPLAY ו-MOVE</span>
-        <span class="stat">הצגת נתונים והעברתם</span>
-      </a>
-      <a class="card" data-lesson="4" href="lessons/lesson4.html">
-        <span class="num">LESSON 04</span>
-        <span class="title">משתנים ו-PIC</span>
-        <span class="stat">הגדרת נתונים ב-DATA DIVISION</span>
-      </a>
-      <a class="card" data-lesson="5" href="lessons/lesson5.html">
-        <span class="num">LESSON 05</span>
-        <span class="title">MOVE לעומק</span>
-        <span class="stat">יישור נתונים, מספרים ומחרוזות</span>
-      </a>
-      <a class="card" data-lesson="6" href="lessons/lesson6.html">
-        <span class="num">LESSON 06</span>
-        <span class="title">ACCEPT</span>
-        <span class="stat">קליטת קלט מהמשתמש</span>
-      </a>
-      <a class="card" data-lesson="7" href="lessons/lesson7.html">
-        <span class="num">LESSON 07</span>
-        <span class="title">ADD</span>
-        <span class="stat">חיבור ערכים</span>
-      </a>
-      <a class="card" data-lesson="8" href="lessons/lesson8.html">
-        <span class="num">LESSON 08</span>
-        <span class="title">SUBTRACT</span>
-        <span class="stat">חיסור ערכים</span>
-      </a>
-      <a class="card" data-lesson="9" href="lessons/lesson9.html">
-        <span class="num">LESSON 09</span>
-        <span class="title">MULTIPLY</span>
-        <span class="stat">כפל ערכים</span>
-      </a>
-      <a class="card" data-lesson="10" href="lessons/lesson10.html">
-        <span class="num">LESSON 10</span>
-        <span class="title">DIVIDE</span>
-        <span class="stat">חילוק ושארית</span>
-      </a>
-      <a class="card" data-lesson="11" href="lessons/lesson11.html">
-        <span class="num">LESSON 11</span>
-        <span class="title">IF / ELSE</span>
-        <span class="stat">קבלת החלטות בתוכנית</span>
-      </a>
-      <a class="card" data-lesson="12" href="lessons/lesson12.html">
-        <span class="num">LESSON 12</span>
-        <span class="title">EVALUATE</span>
-        <span class="stat">בדיקת ערך מול כמה חלופות</span>
-      </a>
-      <a class="card" data-lesson="13" href="lessons/lesson13.html">
-        <span class="num">LESSON 13</span>
-        <span class="title">פסקאות ו-PERFORM</span>
-        <span class="stat">קריאה לקטע קוד בשם</span>
-      </a>
-      <a class="card" data-lesson="14" href="lessons/lesson14.html">
-        <span class="num">LESSON 14</span>
-        <span class="title">PERFORM TIMES / UNTIL</span>
-        <span class="stat">לולאות אמיתיות</span>
-      </a>
-      <a class="card" data-lesson="15" href="lessons/lesson15.html">
-        <span class="num">LESSON 15</span>
-        <span class="title">OCCURS — טבלאות</span>
-        <span class="stat">אחסון כמה ערכים במשתנה אחד</span>
-      </a>
-      <a class="card" data-lesson="16" href="lessons/lesson16.html">
-        <span class="num">LESSON 16</span>
-        <span class="title">PERFORM VARYING</span>
-        <span class="stat">מעבר מסודר על טבלה</span>
-      </a>
-      <a class="card" data-lesson="17" href="lessons/lesson17.html">
-        <span class="num">LESSON 17</span>
-        <span class="title">קבצים</span>
-        <span class="stat">OPEN, READ, WRITE, CLOSE</span>
-      </a>
-      <a class="card quiz" href="quizzes/quiz1.html">
-        <span class="num">QUIZ 01</span>
-        <span class="title">מבחן מסכם</span>
-        <span class="stat">בדקו את הידע שלכם</span>
-      </a>
-    </div>
-  </section>
-
 </main>
 
-<footer>COBOL ACADEMY © 2026 — לימוד עצמי, קצב אישי</footer>
+<footer>COBOL ACADEMY © 2026</footer>
 
-<script src="assets/script.js"></script>
+<script>window.__LESSON_NUM__ = 3;</script>
+<script src="../assets/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 16 — PERFORM VARYING | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON16 JOB (COBOL),'VARYING',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 16 מתוך 17</p>
+    <h1>PERFORM VARYING</h1>
+    <p class="muted">לולאה עם אינדקס עולה — מעבר מסודר על טבלה שלמה.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>PERFORM VARYING — מעבר על טבלה</h2>
+<p>כשיש טבלה (OCCURS), הכי נפוץ לעבור על כל האיברים שלה בלולאה עם אינדקס עולה — בדיוק כמו for-loop בשפות אחרות. PERFORM VARYING עושה את זה בשורה אחת.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX &gt; 12
+    DISPLAY WS-MONTH-NAME(WS-IDX)
+END-PERFORM.</code></pre></div>
+<div class="explain">
+<div class="row"><code>FROM 1</code><span>ערך ההתחלה של האינדקס WS-IDX.</span></div>
+<div class="row"><code>BY 1</code><span>כמה מוסיפים לאינדקס בכל חזרה.</span></div>
+<div class="row"><code>UNTIL WS-IDX &amp;gt; 12</code><span>מתי הלולאה עוצרת — בדיוק כמו ב-PERFORM UNTIL הרגיל.</span></div>
+<div class="row"><code>WS-MONTH-NAME(WS-IDX)</code><span>גישה לתא בטבלה לפי האינדקס הנוכחי — במקום מספר קבוע, יש כאן משתנה.</span></div>
+</div>
+<p>WS-IDX עצמו הוא משתנה רגיל שצריך להגדיר מראש ב-WORKING-STORAGE, בדרך כלל עם <code style="direction:ltr">PIC 9(2)</code> או דומה.</p>
+<div class="exercise" data-answer="5">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם נחליף את התנאי ל-<code style="direction:ltr">UNTIL WS-IDX &gt; 5</code>, כמה פעמים תרוץ הלולאה?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> 5 פעמים — האינדקס עובר על הערכים 1, 2, 3, 4, 5.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson15.html" class="">→ שיעור קודם</a>
+      <a href="lesson17.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 16;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

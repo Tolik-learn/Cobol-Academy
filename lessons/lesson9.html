@@ -39,10 +39,19 @@ PROCEDURE DIVISION.
 <div class="row"><code>MULTIPLY WS-PRICE BY WS-QTY GIVING WS-TOTAL.</code><span>מכפיל מחיר בכמות, ושם את התוצאה (59.97) ב-WS-TOTAL. WS-PRICE ו-WS-QTY נשארים ללא שינוי.</span></div>
 </div>
 <p>גם ל-MULTIPLY יש צורה בלי GIVING — <code style="direction:ltr">MULTIPLY WS-QTY BY WS-PRICE</code> הייתה משנה את WS-PRICE עצמו לתוצאת הכפל. ברוב המקרים GIVING בטוח יותר.</p>
-<details class="exercise">
-<summary>תרגיל — מדוע מומלץ להעדיף MULTIPLY עם GIVING על פני MULTIPLY בלי GIVING?</summary>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">מדוע מומלץ להעדיף MULTIPLY עם GIVING על פני MULTIPLY בלי GIVING?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
 <div class="answer"><b>תשובה:</b> כי בלי GIVING, אחד המשתנים המקוריים (זה שאחרי BY) מוחלף בתוצאת הכפל — ולעיתים קרובות זה לא מה שרוצים, ועלול לגרום לאובדן נתון מקורי בטעות.</div>
 </details>
+</div>
 
 
     <div class="complete-row">

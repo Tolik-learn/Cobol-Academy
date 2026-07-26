@@ -47,10 +47,19 @@ PROCEDURE DIVISION.
 <div class="explain">
 <div class="row"><code>ADD WS-A WS-B GIVING WS-SUM.</code><span>מחבר את WS-A ו-WS-B, ושם את התוצאה (50) ב-WS-SUM — בלי לשנות את WS-A או WS-B.</span></div>
 </div>
-<details class="exercise">
-<summary>תרגיל — אם WS-A=20 ו-WS-B=30, מה ההבדל בין <code style="direction:ltr">ADD WS-A TO WS-B</code> לבין <code style="direction:ltr">ADD WS-A WS-B GIVING WS-SUM</code>?</summary>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם WS-A=20 ו-WS-B=30, מה ההבדל בין <code style="direction:ltr">ADD WS-A TO WS-B</code> לבין <code style="direction:ltr">ADD WS-A WS-B GIVING WS-SUM</code>?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
 <div class="answer"><b>תשובה:</b> הראשון משנה את WS-B עצמו לתוצאה (50) ומאבד את הערך המקורי שלו. השני משאיר את WS-A ו-WS-B ללא שינוי, ורק WS-SUM מקבל את התוצאה.</div>
 </details>
+</div>
 
 
     <div class="complete-row">

@@ -86,8 +86,50 @@ function initQuiz(){
   });
 }
 
+// ---- exercises: type-your-answer + check, then reveal full explanation ----
+function normalize(s){
+  return (s || '').trim().toUpperCase().replace(/\s+/g, ' ').replace(/["'.]/g, '');
+}
+function initExercises(){
+  document.querySelectorAll('.exercise').forEach(ex => {
+    const input = ex.querySelector('.try-input');
+    const btn = ex.querySelector('.try-btn');
+    const feedback = ex.querySelector('.feedback');
+    const reveal = ex.querySelector('.reveal');
+    const answer = ex.getAttribute('data-answer');
+    if(!input || !btn) return;
+
+    function check(){
+      const val = normalize(input.value);
+      if(!val){
+        feedback.textContent = 'הקלידו תשובה לפני שבודקים.';
+        feedback.className = 'feedback';
+        return;
+      }
+      if(answer){
+        if(val === normalize(answer)){
+          feedback.textContent = '✓ נכון!';
+          feedback.className = 'feedback ok';
+        }else{
+          feedback.textContent = '✗ לא מדויק — נסו שוב, או פתחו את ההסבר המלא למטה.';
+          feedback.className = 'feedback err';
+        }
+      }else{
+        feedback.textContent = 'עכשיו השוו את מה שכתבתם להסבר המלא למטה 👇';
+        feedback.className = 'feedback';
+        if(reveal) reveal.setAttribute('open', '');
+      }
+    }
+    btn.addEventListener('click', check);
+    input.addEventListener('keydown', e => {
+      if(e.key === 'Enter'){ e.preventDefault(); check(); }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initHome();
   if(window.__LESSON_NUM__) initLesson(window.__LESSON_NUM__);
   initQuiz();
+  initExercises();
 });

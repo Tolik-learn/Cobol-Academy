@@ -221,19 +221,39 @@ code{ font-family: var(--mono); font-size: .88rem; color: #f2e6c9; line-height: 
 .explain code{ font-size: .82rem; color: var(--amber); direction: ltr; text-align: left; }
 .explain span{ color: var(--text); font-size: .92rem; }
 
-/* ---------- exercise / details ---------- */
-details.exercise{
+/* ---------- exercise: question visible, answer hidden behind its own toggle ---------- */
+.exercise{
   background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
   padding: 1.1rem 1.3rem; margin: 1.6rem 0;
 }
-details.exercise summary{
-  cursor: pointer; font-family: var(--mono); color: var(--amber); font-weight: 600;
-  list-style: none;
+.exercise .q-label{
+  font-family: var(--mono); color: var(--amber); font-weight: 600;
+  font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .5rem;
 }
-details.exercise summary::-webkit-details-marker{ display:none; }
-details.exercise summary::before{ content:"▸ "; }
-details.exercise[open] summary::before{ content:"▾ "; }
-.answer{ margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line); }
+.exercise .q-body{ margin: 0; }
+.exercise .q-body code{ font-size: .88rem; }
+
+.try-row{ display:flex; gap:.6rem; margin-top:1rem; flex-wrap:wrap; }
+.try-input{
+  flex: 1 1 220px; font-family: var(--mono); font-size: .88rem;
+  background: #0f0c09; border: 1px solid var(--line); border-radius: 6px;
+  padding: .55rem .8rem; color: var(--text); direction: ltr; text-align: left;
+}
+.try-input:focus{ border-color: var(--amber-dim); }
+.try-btn{ padding: .55rem 1.1rem; font-size: .84rem; }
+.feedback{ margin: .7rem 0 0; font-family: var(--mono); font-size: .85rem; min-height: 1.2em; }
+.feedback.ok{ color: var(--ok); }
+.feedback.err{ color: var(--err); }
+
+details.reveal{ margin-top: 1rem; }
+details.reveal summary{
+  cursor: pointer; font-family: var(--mono); color: var(--amber-dim);
+  font-weight: 600; font-size: .84rem; list-style: none; user-select: none;
+}
+details.reveal summary::-webkit-details-marker{ display:none; }
+details.reveal summary::before{ content:"▸ "; }
+details.reveal[open] summary::before{ content:"▾ "; }
+.answer{ margin-top: .9rem; padding-top: .9rem; border-top: 1px dashed var(--line); }
 
 .complete-row{ margin: 2.2rem 0; display:flex; align-items:center; gap: 1rem; flex-wrap: wrap; }
 .complete-row .status{ font-family: var(--mono); font-size: .85rem; color: var(--ok); display:none; }

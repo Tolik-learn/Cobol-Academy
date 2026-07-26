@@ -41,10 +41,19 @@ PROCEDURE DIVISION.
 <div class="row"><code>MOVE 42 TO WS-NUM.</code><span>WS-NUM יכיל "00042" — יישור לימין, שלושה אפסים משלימים.</span></div>
 </div>
 <p>נקודה קריטית: אם היעד <b>קטן מדי</b> מכדי להכיל את הערך, COBOL <b>גוזרת</b> אותו בשקט, בלי שגיאה. לדוגמה, MOVE של PIC 9(6) לתוך PIC 9(3) ישאיר רק את 3 הספרות הימניות (הפחות משמעותיות).</p>
-<details class="exercise">
-<summary>תרגיל — אם WS-CODE מוגדר כ-PIC X(3), ונבצע MOVE "HELLO" TO WS-CODE — מה יהיה תוכן המשתנה?</summary>
+<div class="exercise" data-answer="HEL">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם WS-CODE מוגדר כ-PIC X(3), ונבצע MOVE "HELLO" TO WS-CODE — מה יהיה תוכן המשתנה?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
 <div class="answer"><b>תשובה:</b> <code style="direction:ltr">HEL</code> — רק 3 התווים הראשונים נשמרים, השאר נגזר.</div>
 </details>
+</div>
 
 
     <div class="complete-row">

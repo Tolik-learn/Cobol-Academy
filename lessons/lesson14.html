@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 14 — PERFORM TIMES / UNTIL | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON14 JOB (COBOL),'PERFORM2',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 14 מתוך 10</p>
+    <h1>PERFORM TIMES / UNTIL</h1>
+    <p class="muted">שתי הצורות הבסיסיות של לולאה ב-COBOL.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>PERFORM TIMES / UNTIL — לולאות אמיתיות</h2>
+<p>ל-PERFORM יש גם צורות שחוזרות על עצמן — אלו הלולאות (loops) של COBOL.</p>
+<h3 style="font-size:1.1rem;margin-top:1.6rem">PERFORM ... TIMES — מספר חזרות קבוע</h3>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>PERFORM 3 TIMES
+    DISPLAY "HELLO"
+END-PERFORM.</code></pre></div>
+<div class="explain">
+<div class="row"><code>PERFORM 3 TIMES</code><span>חוזר על מה שבפנים בדיוק 3 פעמים, לא פחות ולא יותר.</span></div>
+</div>
+<h3 style="font-size:1.1rem;margin-top:1.6rem">PERFORM ... UNTIL — חזרה עד שתנאי מתקיים</h3>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>PERFORM UNTIL WS-COUNT &gt; 3
+    DISPLAY WS-COUNT
+    ADD 1 TO WS-COUNT
+END-PERFORM.</code></pre></div>
+<div class="explain">
+<div class="row"><code>PERFORM UNTIL WS-COUNT &amp;gt; 3</code><span>בודק את התנאי <b>לפני</b> כל חזרה — כשהוא מתקיים, הלולאה עוצרת.</span></div>
+<div class="row"><code>ADD 1 TO WS-COUNT</code><span>חובה לעדכן את המשתנה בתוך הלולאה, אחרת היא לעולם לא תיעצר (לולאה אינסופית).</span></div>
+</div>
+<div class="exercise" data-answer="3">
+<p class="q-label">תרגיל</p>
+<p class="q-body">כמה פעמים תודפס המילה "HELLO" בלולאת ה-TIMES שלמעלה?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> 3 פעמים.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson13.html" class="">→ שיעור קודם</a>
+      <a href="lesson15.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 14;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

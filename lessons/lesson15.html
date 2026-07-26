@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 15 — OCCURS — טבלאות | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON15 JOB (COBOL),'OCCURS',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 15 מתוך 10</p>
+    <h1>OCCURS — טבלאות</h1>
+    <p class="muted">איך שומרים כמה ערכים מאותו סוג במשתנה אחד.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>OCCURS — טבלאות ומערכים</h2>
+<p>כשצריך לאחסן כמה ערכים מאותו סוג (12 חודשים, 5 עובדים, 100 מוצרים) — לא מגדירים משתנה נפרד לכל אחד. OCCURS הופך משתנה יחיד ל"טבלה" (מערך) עם כמה תאים.</p>
+<div class="codeblock"><pre><code>01  WS-MONTHS.
+    05  WS-MONTH-NAME  OCCURS 12 TIMES  PIC X(9).</code></pre></div>
+<div class="explain">
+<div class="row"><code>01  WS-MONTHS.</code><span>המשתנה "אב" שמכיל את כל הטבלה — ללא PIC משלו, כי הוא רק מסגרת.</span></div>
+<div class="row"><code>05  WS-MONTH-NAME OCCURS 12 TIMES PIC X(9)</code><span>מגדיר 12 תאים, כל אחד טקסט עד 9 תווים.</span></div>
+</div>
+<p>גישה לאיבר ספציפי בטבלה נעשית עם סוגריים ומספר האינדקס (מתחיל מ-1, לא מ-0):</p>
+<div class="codeblock"><pre><code>MOVE "JANUARY" TO WS-MONTH-NAME(1).</code></pre></div>
+<div class="exercise" data-answer="12">
+<p class="q-label">תרגיל</p>
+<p class="q-body">כמה תאים (איברים) יש בטבלה WS-MONTH-NAME שהוגדרה למעלה?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> 12 — בדיוק כמספר שצוין ב-OCCURS.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson14.html" class="">→ שיעור קודם</a>
+      <a href="lesson16.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 15;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

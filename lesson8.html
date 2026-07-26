@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 8 — SUBTRACT | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON08 JOB (COBOL),'SUBTRACT',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 8 מתוך 10</p>
+    <h1>SUBTRACT</h1>
+    <p class="muted">חיסור ערכים, וכיוון שחשוב לשים לב אליו.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>SUBTRACT — חיסור ערכים</h2>
+<p>התחביר של SUBTRACT מקביל ל-ADD, אבל כיוון החיסור חשוב: התחביר קורא "הפחת X מ-Y".</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-STOCK   PIC 9(5) VALUE 100.
+
+PROCEDURE DIVISION.
+    SUBTRACT 30 FROM WS-STOCK.
+    DISPLAY WS-STOCK.</code></pre></div>
+<div class="explain">
+<div class="row"><code>SUBTRACT 30 FROM WS-STOCK.</code><span>מפחית 30 מהערך הקיים ב-WS-STOCK. התוצאה (70) נשמרת חזרה באותו משתנה.</span></div>
+</div>
+<p>וכמובן, גם כאן אפשר להשתמש ב-GIVING כדי לשמור את המקורות ולקבל תוצאה במשתנה נפרד:</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-A       PIC 9(5) VALUE 100.
+01  WS-B       PIC 9(5) VALUE 30.
+01  WS-DIFF    PIC 9(5).
+
+PROCEDURE DIVISION.
+    SUBTRACT WS-B FROM WS-A GIVING WS-DIFF.
+    DISPLAY WS-DIFF.</code></pre></div>
+<div class="explain">
+<div class="row"><code>SUBTRACT WS-B FROM WS-A GIVING WS-DIFF.</code><span>מחשב WS-A פחות WS-B (70) ושם את התוצאה ב-WS-DIFF, בלי לשנות את WS-A או WS-B.</span></div>
+</div>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">למה <code style="direction:ltr">SUBTRACT WS-A FROM WS-B</code> לא זהה ל-<code style="direction:ltr">SUBTRACT WS-B FROM WS-A</code>?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> כי הכיוון קובע מי מחסירים ממי — FROM מציין את המשתנה שממנו מפחיתים. הפוך ביניהם ותקבלו תוצאה שונה (ולעיתים שלילית).</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson7.html" class="">→ שיעור קודם</a>
+      <a href="lesson9.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 8;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 10 — DIVIDE | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON10 JOB (COBOL),'DIVIDE',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 10 מתוך 10</p>
+    <h1>DIVIDE</h1>
+    <p class="muted">חילוק, כולל שארית — הפקודה החשבונית העשירה ביותר.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>DIVIDE — חילוק ושארית</h2>
+<p>DIVIDE היא הפעולה החשבונית העשירה ביותר בתחביר: אפשר לקבל גם את התוצאה וגם את השארית בבת אחת, בעזרת REMAINDER.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-TOTAL     PIC 9(5) VALUE 47.
+01  WS-PEOPLE    PIC 9(3) VALUE 5.
+01  WS-SHARE     PIC 9(5).
+01  WS-LEFTOVER  PIC 9(5).
+
+PROCEDURE DIVISION.
+    DIVIDE WS-TOTAL BY WS-PEOPLE
+        GIVING WS-SHARE
+        REMAINDER WS-LEFTOVER.
+    DISPLAY WS-SHARE.
+    DISPLAY WS-LEFTOVER.</code></pre></div>
+<div class="explain">
+<div class="row"><code>DIVIDE WS-TOTAL BY WS-PEOPLE</code><span>מחלק 47 ב-5.</span></div>
+<div class="row"><code>GIVING WS-SHARE</code><span>התוצאה השלמה (9) נשמרת ב-WS-SHARE.</span></div>
+<div class="row"><code>REMAINDER WS-LEFTOVER</code><span>השארית (2) נשמרת בנפרד ב-WS-LEFTOVER — שימושי כשצריך גם את החלק וגם את מה שנשאר.</span></div>
+</div>
+<p>כמו ב-ADD, SUBTRACT ו-MULTIPLY, יש גם צורה פשוטה בלי GIVING/REMAINDER — אבל ברוב התוכניות העסקיות (כמו חלוקת סכום כסף בין אנשים) REMAINDER הוא בדיוק מה שצריך.</p>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם WS-TOTAL=20 ו-WS-PEOPLE=6, מה יהיו WS-SHARE ו-WS-LEFTOVER?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> WS-SHARE = 3 (התוצאה השלמה של 20 חלקי 6), WS-LEFTOVER = 2 (השארית).</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson9.html" class="">→ שיעור קודם</a>
+      <a href="../quizzes/quiz1.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 10;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

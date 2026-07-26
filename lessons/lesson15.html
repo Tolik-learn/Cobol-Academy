@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 2 — מבנה תוכנית COBOL | COBOL Academy</title>
+<title>שיעור 15 — OCCURS — טבלאות | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,43 +19,26 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON02 JOB (COBOL),'STRUCT',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 2 מתוך 17</p>
-    <h1>מבנה תוכנית COBOL</h1>
-    <p class="muted">ארבע חטיבות, סדר קבוע, תפקיד ברור לכל אחת.</p>
+    <div class="jcl">// LESSON15 JOB (COBOL),'OCCURS',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 15 מתוך 17</p>
+    <h1>OCCURS — טבלאות</h1>
+    <p class="muted">איך שומרים כמה ערכים מאותו סוג במשתנה אחד.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>ארבע ה-DIVISIONS</h2>
-<p>כל תוכנית COBOL בנויה מארבע חטיבות, תמיד באותו סדר. לא כולן חובה בכל תוכנית, אבל הסדר ביניהן — כן קבוע:</p>
+    <h2>OCCURS — טבלאות ומערכים</h2>
+<p>כשצריך לאחסן כמה ערכים מאותו סוג (12 חודשים, 5 עובדים, 100 מוצרים) — לא מגדירים משתנה נפרד לכל אחד. OCCURS הופך משתנה יחיד ל"טבלה" (מערך) עם כמה תאים.</p>
+<div class="codeblock"><pre><code>01  WS-MONTHS.
+    05  WS-MONTH-NAME  OCCURS 12 TIMES  PIC X(9).</code></pre></div>
 <div class="explain">
-<div class="row"><code>IDENTIFICATION DIVISION</code><span>מי אני — שם התוכנית ופרטים מזהים. חטיבת חובה.</span></div>
-<div class="row"><code>ENVIRONMENT DIVISION</code><span>באיזו סביבה התוכנית רצה — חומרה, קבצים חיצוניים. לרוב לא נדרשת בתרגילים בסיסיים.</span></div>
-<div class="row"><code>DATA DIVISION</code><span>אילו משתנים ונתונים התוכנית משתמשת בהם — כאן מגדירים אותם לפני השימוש.</span></div>
-<div class="row"><code>PROCEDURE DIVISION</code><span>מה התוכנית בפועל <b>עושה</b> — רצף הפקודות שמתבצע.</span></div>
+<div class="row"><code>01  WS-MONTHS.</code><span>המשתנה "אב" שמכיל את כל הטבלה — ללא PIC משלו, כי הוא רק מסגרת.</span></div>
+<div class="row"><code>05  WS-MONTH-NAME OCCURS 12 TIMES PIC X(9)</code><span>מגדיר 12 תאים, כל אחד טקסט עד 9 תווים.</span></div>
 </div>
-<h3 style="font-size:1.1rem;margin-top:1.6rem">שלד תוכנית מלא</h3>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IDENTIFICATION DIVISION.
-PROGRAM-ID. GREETING.
-
-ENVIRONMENT DIVISION.
-
-DATA DIVISION.
-WORKING-STORAGE SECTION.
-01  WS-NAME       PIC X(10) VALUE "STUDENT".
-
-PROCEDURE DIVISION.
-    DISPLAY "HELLO, " WS-NAME.
-    STOP RUN.</code></pre></div>
-<div class="explain">
-<div class="row"><code>WORKING-STORAGE SECTION.</code><span>חלק בתוך ה-DATA DIVISION שבו מגדירים משתנים זמניים לשימוש התוכנית.</span></div>
-<div class="row"><code>01  WS-NAME       PIC X(10) VALUE "STUDENT".</code><span>מגדיר משתנה בשם WS-NAME, מסוג טקסט (X) באורך 10 תווים, עם ערך התחלתי.</span></div>
-<div class="row"><code>DISPLAY "HELLO, " WS-NAME.</code><span>מדפיס טקסט קבוע ומיד אחריו את תוכן המשתנה — אפשר לשרשר כמה איברים ב-DISPLAY אחד.</span></div>
-</div>
-<p>שימו לב: <b>DATA DIVISION</b> ו-<b>PROCEDURE DIVISION</b> הן החטיבות שבהן תבלו הכי הרבה זמן — כל שיעורי ההמשך מתמקדים בהן.</p>
-<div class="exercise" data-answer="PROCEDURE DIVISION">
+<p>גישה לאיבר ספציפי בטבלה נעשית עם סוגריים ומספר האינדקס (מתחיל מ-1, לא מ-0):</p>
+<div class="codeblock"><pre><code>MOVE "JANUARY" TO WS-MONTH-NAME(1).</code></pre></div>
+<div class="exercise" data-answer="12">
 <p class="q-label">תרגיל</p>
-<p class="q-body">לפי הסדר הקבוע, אילו חטיבה באה מיד <b>אחרי</b> ה-DATA DIVISION?</p>
+<p class="q-body">כמה תאים (איברים) יש בטבלה WS-MONTH-NAME שהוגדרה למעלה?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -63,7 +46,7 @@ PROCEDURE DIVISION.
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> PROCEDURE DIVISION — שם נמצא הקוד שמתבצע בפועל.</div>
+<div class="answer"><b>תשובה:</b> 12 — בדיוק כמספר שצוין ב-OCCURS.</div>
 </details>
 </div>
 
@@ -74,15 +57,15 @@ PROCEDURE DIVISION.
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson1.html" class="">→ שיעור קודם</a>
-      <a href="lesson3.html" class="">שיעור הבא ←</a>
+      <a href="lesson14.html" class="">→ שיעור קודם</a>
+      <a href="lesson16.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 2;</script>
+<script>window.__LESSON_NUM__ = 15;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

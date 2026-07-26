@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>שיעור 9 — MULTIPLY | COBOL Academy</title>
+<title>שיעור 5 — MOVE לעומק | COBOL Academy</title>
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -19,29 +19,31 @@
 
 <main class="wrap">
   <section class="lesson-header">
-    <div class="jcl">// LESSON09 JOB (COBOL),'MULTIPLY',CLASS=A<br>// EXEC COBOL</div>
-    <p class="eyebrow">שיעור 9 מתוך 17</p>
-    <h1>MULTIPLY</h1>
-    <p class="muted">כפל ערכים — ולמה GIVING כמעט תמיד עדיף.</p>
+    <div class="jcl">// LESSON05 JOB (COBOL),'MOVE2',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 5 מתוך 17</p>
+    <h1>MOVE לעומק</h1>
+    <p class="muted">יישור נתונים, מספרים, וגם מתי מידע הולך לאיבוד.</p>
   </section>
 
   <section style="padding-top:0">
-    <h2>MULTIPLY — כפל ערכים</h2>
-<p>MULTIPLY כמעט תמיד תשתמשו איתה יחד עם GIVING, כי כפל "במקום" (בלי GIVING) משנה את אחד המשתנים המקוריים בעצמו — מה שקל לבלבל בטעות.</p>
-<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-PRICE   PIC 9(5)V99 VALUE 19.99.
-01  WS-QTY     PIC 9(3)    VALUE 3.
-01  WS-TOTAL   PIC 9(7)V99.
+    <h2>MOVE לעומק — יישור וגזירה</h2>
+<p>MOVE לא רק מעתיק ערך — הוא גם מיישר אותו לפי סוג היעד. טקסט (X) מיושר לשמאל ומתמלא ברווחים; מספרים (9) מיושרים לימין ומתמלאים באפסים.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-CODE   PIC X(5).
+01  WS-NUM    PIC 9(5).
 
 PROCEDURE DIVISION.
-    MULTIPLY WS-PRICE BY WS-QTY GIVING WS-TOTAL.
-    DISPLAY WS-TOTAL.</code></pre></div>
+    MOVE "AB" TO WS-CODE.
+    MOVE 42   TO WS-NUM.
+    DISPLAY WS-CODE.
+    DISPLAY WS-NUM.</code></pre></div>
 <div class="explain">
-<div class="row"><code>MULTIPLY WS-PRICE BY WS-QTY GIVING WS-TOTAL.</code><span>מכפיל מחיר בכמות, ושם את התוצאה (59.97) ב-WS-TOTAL. WS-PRICE ו-WS-QTY נשארים ללא שינוי.</span></div>
+<div class="row"><code>MOVE "AB" TO WS-CODE.</code><span>WS-CODE יכיל "AB   " — יישור לשמאל, שלושה רווחים משלימים.</span></div>
+<div class="row"><code>MOVE 42 TO WS-NUM.</code><span>WS-NUM יכיל "00042" — יישור לימין, שלושה אפסים משלימים.</span></div>
 </div>
-<p>גם ל-MULTIPLY יש צורה בלי GIVING — <code style="direction:ltr">MULTIPLY WS-QTY BY WS-PRICE</code> הייתה משנה את WS-PRICE עצמו לתוצאת הכפל. ברוב המקרים GIVING בטוח יותר.</p>
-<div class="exercise">
+<p>נקודה קריטית: אם היעד <b>קטן מדי</b> מכדי להכיל את הערך, COBOL <b>גוזרת</b> אותו בשקט, בלי שגיאה. לדוגמה, MOVE של PIC 9(6) לתוך PIC 9(3) ישאיר רק את 3 הספרות הימניות (הפחות משמעותיות).</p>
+<div class="exercise" data-answer="HEL">
 <p class="q-label">תרגיל</p>
-<p class="q-body">מדוע מומלץ להעדיף MULTIPLY עם GIVING על פני MULTIPLY בלי GIVING?</p>
+<p class="q-body">אם WS-CODE מוגדר כ-PIC X(3), ונבצע MOVE "HELLO" TO WS-CODE — מה יהיה תוכן המשתנה?</p>
 <div class="try-row">
 <input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
 <button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
@@ -49,7 +51,7 @@ PROCEDURE DIVISION.
 <p class="feedback"></p>
 <details class="reveal">
 <summary>הצג הסבר מלא</summary>
-<div class="answer"><b>תשובה:</b> כי בלי GIVING, אחד המשתנים המקוריים (זה שאחרי BY) מוחלף בתוצאת הכפל — ולעיתים קרובות זה לא מה שרוצים, ועלול לגרום לאובדן נתון מקורי בטעות.</div>
+<div class="answer"><b>תשובה:</b> <code style="direction:ltr">HEL</code> — רק 3 התווים הראשונים נשמרים, השאר נגזר.</div>
 </details>
 </div>
 
@@ -60,15 +62,15 @@ PROCEDURE DIVISION.
     </div>
 
     <div class="lesson-nav">
-      <a href="lesson8.html" class="">→ שיעור קודם</a>
-      <a href="lesson10.html" class="">שיעור הבא ←</a>
+      <a href="lesson4.html" class="">→ שיעור קודם</a>
+      <a href="lesson6.html" class="">שיעור הבא ←</a>
     </div>
   </section>
 </main>
 
 <footer>COBOL ACADEMY © 2026</footer>
 
-<script>window.__LESSON_NUM__ = 9;</script>
+<script>window.__LESSON_NUM__ = 5;</script>
 <script src="../assets/script.js"></script>
 </body>
 </html>

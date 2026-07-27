@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 20 — COPY | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON20 JOB (COBOL),'COPY',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 20 מתוך 20</p>
+    <h1>COPY</h1>
+    <p class="muted">שיתוף קוד בין כמה תוכניות COBOL.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>COPY — שיתוף קוד בין תוכניות</h2>
+<p>כשכמה תוכניות COBOL צריכות את אותה הגדרת נתונים (למשל מבנה רשומת לקוח), לא רוצים להעתיק-להדביק את אותן שורות בכל תוכנית — כי כל שינוי יצטרך להתעדכן בכל מקום בנפרד. COPY שולפת קטע קוד מקובץ חיצוני משותף, ממש כמו include/import בשפות אחרות.</p>
+<div class="codeblock"><pre><code>01  CUSTOMER-RECORD.
+    05  CUST-ID      PIC 9(6).
+    05  CUST-NAME    PIC X(30).
+    05  CUST-BALANCE PIC 9(7)V99.</code></pre></div>
+<p>אם השורות האלה נשמרות בקובץ נפרד בשם <code style="direction:ltr">CUSTREC.CPY</code>, כל תוכנית שצריכה אותן פשוט כותבת:</p>
+<div class="codeblock"><pre><code>COPY CUSTREC.</code></pre></div>
+<div class="explain">
+<div class="row"><code>COPY CUSTREC.</code><span>בזמן הקומפילציה, COBOL מחליפה את השורה הזו בתוכן המלא של הקובץ CUSTREC.CPY — כאילו הועתק-הודבק שם ידנית.</span></div>
+</div>
+<p>היתרון: כשמבנה הרשומה משתנה (מוסיפים שדה, למשל), מספיק לעדכן את קובץ ה-COPY פעם אחת, וכל התוכניות שמשתמשות בו מתעדכנות אוטומטית בקומפילציה הבאה.</p>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">מה קורה בפועל, מבחינת הקומפיילר, כשהוא נתקל בשורת COPY CUSTREC.?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> הוא מחליף את השורה בתוכן המלא של קובץ CUSTREC.CPY, בדיוק כאילו הקוד הועתק לשם ידנית.</div>
+</details>
+</div>
+<div class="code-challenge" data-keywords="UNSTRING,STRING,DELIMITED BY,INTO">
+<p class="q-label">אתגר כתיבה — סיכום החלק</p>
+<p class="q-body">סיימתם את חלק הטקסט והמבנה (שיעורים 18–20)! עכשיו נסו בעצמכם: כתבו קטע קוד שמפרק (UNSTRING) מחרוזת בפורמט "שם,עיר" לשני משתנים, ואז משתמש ב-STRING כדי להרכיב מהם משפט "שם מתגורר בעיר עיר".</p>
+<textarea class="code-try" rows="9" placeholder="כתבו כאן את קוד ה-COBOL שלכם..." spellcheck="false"></textarea>
+<div class="try-row" style="margin-top:.6rem">
+<button type="button" class="btn btn-ghost try-btn-code">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג פתרון לדוגמה</summary>
+<div class="answer"><pre><code>01  WS-INPUT    PIC X(30) VALUE "DANA,TEL AVIV".
+01  WS-NAME     PIC X(15).
+01  WS-CITY     PIC X(15).
+01  WS-MSG      PIC X(40).
+
+PROCEDURE DIVISION.
+    UNSTRING WS-INPUT DELIMITED BY ","
+        INTO WS-NAME WS-CITY.
+    STRING WS-NAME    DELIMITED BY SPACE
+           " LIVES IN " DELIMITED BY SIZE
+           WS-CITY    DELIMITED BY SPACE
+           INTO WS-MSG.
+    DISPLAY WS-MSG.</code></pre></div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson19.html" class="">→ שיעור קודם</a>
+      <a href="../quizzes/quiz3.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 20;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

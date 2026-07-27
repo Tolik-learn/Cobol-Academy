@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 6 — ACCEPT | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON06 JOB (COBOL),'ACCEPT',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 6 מתוך 20</p>
+    <h1>ACCEPT</h1>
+    <p class="muted">איך תוכנית COBOL מקבלת קלט מהמשתמש.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>ACCEPT — קליטת קלט</h2>
+<p>ACCEPT היא הפקודה ההפוכה ל-DISPLAY: במקום להוציא מידע החוצה, היא קולטת מידע מהמשתמש (או ממקור חיצוני אחר) ושומרת אותו לתוך משתנה.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IDENTIFICATION DIVISION.
+PROGRAM-ID. GETNAME.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01  WS-NAME   PIC X(20).
+
+PROCEDURE DIVISION.
+    DISPLAY "ENTER YOUR NAME: ".
+    ACCEPT WS-NAME.
+    DISPLAY "WELCOME, " WS-NAME.
+    STOP RUN.</code></pre></div>
+<div class="explain">
+<div class="row"><code>DISPLAY "ENTER YOUR NAME: ".</code><span>מציג הנחיה למשתמש — נהוג להציג הודעה לפני כל ACCEPT.</span></div>
+<div class="row"><code>ACCEPT WS-NAME.</code><span>התוכנית עוצרת וממתינה שהמשתמש יקליד ערך ולוחץ Enter.</span></div>
+<div class="row"><code>DISPLAY "WELCOME, " WS-NAME.</code><span>מציג את מה שהמשתמש הקליד.</span></div>
+</div>
+<p>בדיוק כמו ב-MOVE, גם כאן חלים כללי היישור והגזירה: אם המשתמש מקליד יותר תווים מאורך המשתנה, העודף נגזר.</p>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">מה תפקידה של DISPLAY בדרך כלל לפני שורת ACCEPT?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> להציג למשתמש הנחיה ברורה על מה שמצופה ממנו להקליד — ACCEPT עצמו לא מציג שום טקסט.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson5.html" class="">→ שיעור קודם</a>
+      <a href="lesson7.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 6;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

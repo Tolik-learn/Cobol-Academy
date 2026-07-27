@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 9 — MULTIPLY | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON09 JOB (COBOL),'MULTIPLY',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 9 מתוך 20</p>
+    <h1>MULTIPLY</h1>
+    <p class="muted">כפל ערכים — ולמה GIVING כמעט תמיד עדיף.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>MULTIPLY — כפל ערכים</h2>
+<p>MULTIPLY כמעט תמיד תשתמשו איתה יחד עם GIVING, כי כפל "במקום" (בלי GIVING) משנה את אחד המשתנים המקוריים בעצמו — מה שקל לבלבל בטעות.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-PRICE   PIC 9(5)V99 VALUE 19.99.
+01  WS-QTY     PIC 9(3)    VALUE 3.
+01  WS-TOTAL   PIC 9(7)V99.
+
+PROCEDURE DIVISION.
+    MULTIPLY WS-PRICE BY WS-QTY GIVING WS-TOTAL.
+    DISPLAY WS-TOTAL.</code></pre></div>
+<div class="explain">
+<div class="row"><code>MULTIPLY WS-PRICE BY WS-QTY GIVING WS-TOTAL.</code><span>מכפיל מחיר בכמות, ושם את התוצאה (59.97) ב-WS-TOTAL. WS-PRICE ו-WS-QTY נשארים ללא שינוי.</span></div>
+</div>
+<p>גם ל-MULTIPLY יש צורה בלי GIVING — <code style="direction:ltr">MULTIPLY WS-QTY BY WS-PRICE</code> הייתה משנה את WS-PRICE עצמו לתוצאת הכפל. ברוב המקרים GIVING בטוח יותר.</p>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">מדוע מומלץ להעדיף MULTIPLY עם GIVING על פני MULTIPLY בלי GIVING?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> כי בלי GIVING, אחד המשתנים המקוריים (זה שאחרי BY) מוחלף בתוצאת הכפל — ולעיתים קרובות זה לא מה שרוצים, ועלול לגרום לאובדן נתון מקורי בטעות.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson8.html" class="">→ שיעור קודם</a>
+      <a href="lesson10.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 9;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

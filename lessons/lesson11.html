@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 11 — IF / ELSE | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON11 JOB (COBOL),'IFELSE',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 11 מתוך 20</p>
+    <h1>IF / ELSE</h1>
+    <p class="muted">איך תוכנית COBOL מקבלת החלטות.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>IF / ELSE — קבלת החלטות</h2>
+<p>עד עכשיו התוכניות שלנו רצו בקו ישר, שורה אחר שורה. IF הוא הצעד הראשון לקוד שמתנהג אחרת בהתאם לנתונים — ממש כמו בכל שפת תכנות אחרת.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>IF WS-AGE &gt; 18
+    DISPLAY "ADULT"
+ELSE
+    DISPLAY "MINOR"
+END-IF.</code></pre></div>
+<div class="explain">
+<div class="row"><code>IF WS-AGE &amp;gt; 18</code><span>בודק תנאי. אפשר להשתמש בסימנים (&gt; &lt; =) או במילים (GREATER THAN, LESS THAN).</span></div>
+<div class="row"><code>DISPLAY "ADULT"</code><span>מתבצע רק אם התנאי התקיים (TRUE).</span></div>
+<div class="row"><code>ELSE</code><span>מסמן את הענף החלופי — מה לעשות אם התנאי לא התקיים.</span></div>
+<div class="row"><code>DISPLAY "MINOR"</code><span>מתבצע רק אם התנאי לא התקיים (FALSE).</span></div>
+<div class="row"><code>END-IF.</code><span>סוגר את גוש התנאי. ב-COBOL מודרני זה חובה כדי למנוע בלבול לגבי היכן ה-IF נגמר.</span></div>
+</div>
+<p>ה-ELSE הוא אופציונלי — אפשר לכתוב IF בלי ELSE כלל, אם רוצים שרק יקרה משהו כשהתנאי אמיתי.</p>
+<div class="exercise" data-answer="MINOR">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם WS-AGE שווה ל-15, מה תדפיס התוכנית שלמעלה?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> MINOR — כי 15 אינו גדול מ-18, אז מתבצע הענף של ה-ELSE.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson10.html" class="">→ שיעור קודם</a>
+      <a href="lesson12.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 11;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

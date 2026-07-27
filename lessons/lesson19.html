@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 19 — Level 88 — שמות תנאי | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON19 JOB (COBOL),'LEVEL88',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 19 מתוך 20</p>
+    <h1>Level 88 — שמות תנאי</h1>
+    <p class="muted">לתת שם קריא לערך, במקום להשוות אליו כל פעם מחדש.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>Level 88 — שמות תנאי (Condition Names)</h2>
+<p>במקום לכתוב שוב ושוב <code style="direction:ltr">IF WS-STATUS = "A"</code> בכל מקום בתוכנית, אפשר לתת לערך הזה שם קריא פעם אחת — עם רמה מיוחדת, 88 — ואז להשתמש בשם בכל מקום.</p>
+<div class="codeblock"><pre><code>01  WS-STATUS       PIC X.
+    88  IS-ACTIVE   VALUE "A".
+    88  IS-CLOSED   VALUE "C".</code></pre></div>
+<div class="explain">
+<div class="row"><code>88  IS-ACTIVE VALUE "A".</code><span>מגדיר שם-תנאי: כשרוצים לבדוק אם WS-STATUS שווה ל-A, אפשר לכתוב IS-ACTIVE במקום.</span></div>
+<div class="row"><code>88  IS-CLOSED VALUE "C".</code><span>אותו רעיון לערך C — אפשר להגדיר כמה שמות-תנאי שרוצים תחת אותו משתנה.</span></div>
+</div>
+<p>עכשיו בתוך PROCEDURE DIVISION אפשר לכתוב:</p>
+<div class="codeblock"><pre><code>IF IS-ACTIVE
+    DISPLAY "ACCOUNT IS ACTIVE"
+END-IF.</code></pre></div>
+<p>שימו לב כמה זה קריא יותר מ- <code style="direction:ltr">IF WS-STATUS = "A"</code> — ובנוסף, אם ערך הקוד משתנה בעתיד (למשל A הופך ל-01), משנים רק את ה-VALUE בהגדרה, ולא כל IF בתוכנית.</p>
+<div class="exercise">
+<p class="q-label">תרגיל</p>
+<p class="q-body">אם WS-STATUS שווה ל-"C", האם התנאי IS-ACTIVE יתקיים?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> לא — IS-ACTIVE מוגדר רק עבור הערך "A". במקרה הזה יתקיים IS-CLOSED.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson18.html" class="">→ שיעור קודם</a>
+      <a href="lesson20.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 19;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

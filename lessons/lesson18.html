@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 18 — STRING / UNSTRING | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="lesson1.html" class="active">שיעורים</a>
+    <a href="../quizzes/quiz1.html">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// LESSON18 JOB (COBOL),'STRINGS',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">שיעור 18 מתוך 20</p>
+    <h1>STRING / UNSTRING</h1>
+    <p class="muted">חיבור ופירוק טקסטים.</p>
+  </section>
+
+  <section style="padding-top:0">
+    <h2>STRING — חיבור טקסטים</h2>
+<p>STRING מחברת כמה חלקי טקסט (ליטרלים או משתנים) לתוך משתנה אחד — שימושי כשרוצים להרכיב הודעה או שורה שלמה מכמה מקורות.</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-FIRST   PIC X(10) VALUE "TOLIK".
+01  WS-LAST    PIC X(10) VALUE "LEARN".
+01  WS-FULL    PIC X(25).
+
+PROCEDURE DIVISION.
+    STRING WS-FIRST DELIMITED BY SPACE
+           " "     DELIMITED BY SIZE
+           WS-LAST DELIMITED BY SPACE
+           INTO WS-FULL.
+    DISPLAY WS-FULL.</code></pre></div>
+<div class="explain">
+<div class="row"><code>STRING ... INTO WS-FULL.</code><span>מחבר את כל החלקים שלמעלה לתוך WS-FULL, בסדר שבו הם מופיעים.</span></div>
+<div class="row"><code>DELIMITED BY SPACE</code><span>אומר "קח מהמשתנה רק עד הרווח הראשון" — כדי לא לגרור את הרווחים המיותרים מה-PIC X(10).</span></div>
+<div class="row"><code>DELIMITED BY SIZE</code><span>אומר "קח את כל התו הזה במלואו" — משמש לליטרלים קצרים כמו רווח בודד.</span></div>
+</div>
+<h2>UNSTRING — פירוק טקסט</h2>
+<p>UNSTRING עושה בדיוק ההפך — מפרקת מחרוזת אחת לכמה משתנים, לפי תו מפריד (כמו פסיק).</p>
+<div class="codeblock"><div class="ruler"><span class="mark a" title="Area A — עמודה 8">A</span><span class="mark b" title="Area B — עמודה 12">B</span></div><pre><code>01  WS-CSV     PIC X(20) VALUE "TOLIK,LEARN,COBOL".
+01  WS-PART1   PIC X(10).
+01  WS-PART2   PIC X(10).
+01  WS-PART3   PIC X(10).
+
+PROCEDURE DIVISION.
+    UNSTRING WS-CSV DELIMITED BY ","
+        INTO WS-PART1 WS-PART2 WS-PART3.</code></pre></div>
+<div class="explain">
+<div class="row"><code>UNSTRING WS-CSV DELIMITED BY ","</code><span>מפרק את WS-CSV לפי כל פסיק שנמצא בו.</span></div>
+<div class="row"><code>INTO WS-PART1 WS-PART2 WS-PART3</code><span>כל חלק בין הפסיקים נכנס למשתנה הבא ברשימה.</span></div>
+</div>
+<div class="exercise" data-answer="LEARN">
+<p class="q-label">תרגיל</p>
+<p class="q-body">מה יהיה תוכן WS-PART2 אחרי ה-UNSTRING שלמעלה?</p>
+<div class="try-row">
+<input type="text" class="try-input" placeholder="הקלידו את התשובה שלכם">
+<button type="button" class="btn btn-ghost try-btn">בדקו אותי</button>
+</div>
+<p class="feedback"></p>
+<details class="reveal">
+<summary>הצג הסבר מלא</summary>
+<div class="answer"><b>תשובה:</b> LEARN — החלק השני בין הפסיקים.</div>
+</details>
+</div>
+
+
+    <div class="complete-row">
+      <button class="btn btn-primary mark-done-btn">סמן שיעור כהושלם</button>
+      <span class="status">✓ השיעור סומן כהושלם</span>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="lesson17.html" class="">→ שיעור קודם</a>
+      <a href="lesson19.html" class="">שיעור הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script>window.__LESSON_NUM__ = 18;</script>
+<script src="../assets/script.js"></script>
+</body>
+</html>

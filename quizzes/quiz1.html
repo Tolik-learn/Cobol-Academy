@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מבחן חלק 1 — יסודות ואריתמטיקה | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="../lessons/lesson1.html">שיעורים</a>
+    <a href="quiz1.html" class="active">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// QUIZ01 JOB (COBOL),'PART1',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">מבחן חלק 1</p>
+    <h1>מבחן חלק 1 — יסודות ואריתמטיקה</h1>
+    <p class="muted">8 שאלות על שיעורים 1–10 (מבנה תוכנית, DISPLAY/MOVE, PIC, פעולות חשבון). בחרו תשובה — המשוב מיידי.</p>
+  </section>
+
+  <section style="padding-top:0">
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q">1. איזו חטיבה חייבת להופיע ראשונה בכל תוכנית COBOL?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q1"> DATA DIVISION</label>
+        <label class="opt" data-value="b"><input type="radio" name="q1"> IDENTIFICATION DIVISION</label>
+        <label class="opt" data-value="c"><input type="radio" name="q1"> PROCEDURE DIVISION</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q">2. איפה מגדירים משתנים כמו WS-NAME לפני שמשתמשים בהם?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q2"> ב-WORKING-STORAGE SECTION, בתוך DATA DIVISION</label>
+        <label class="opt" data-value="b"><input type="radio" name="q2"> ב-PROCEDURE DIVISION</label>
+        <label class="opt" data-value="c"><input type="radio" name="q2"> ב-ENVIRONMENT DIVISION</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q code-q">3. מה יודפס? <code>DISPLAY "SHALOM".</code></p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q3"> ריק</label>
+        <label class="opt" data-value="b"><input type="radio" name="q3"> שגיאה</label>
+        <label class="opt" data-value="c"><input type="radio" name="q3"> SHALOM</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q">4. מה מסמן PIC X(8)?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q4"> מספר בן 8 ספרות</label>
+        <label class="opt" data-value="b"><input type="radio" name="q4"> טקסט (אלפאנומרי) עד 8 תווים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q4"> מספר עשרוני עם 8 ספרות אחרי הנקודה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">5. אם WS-CODE הוא <code>PIC X(3)</code>, מה יקרה אחרי <code>MOVE "HELLO" TO WS-CODE</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q5"> WS-CODE יכיל HEL — שאר התווים נגזרים</label>
+        <label class="opt" data-value="b"><input type="radio" name="q5"> תתקבל שגיאת ריצה</label>
+        <label class="opt" data-value="c"><input type="radio" name="q5"> WS-CODE יתרחב אוטומטית כדי להכיל את כל המילה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">6. מה תפקידה של פקודת ACCEPT?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q6"> להדפיס ערך למסך</label>
+        <label class="opt" data-value="b"><input type="radio" name="q6"> להשוות בין שני משתנים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q6"> לקלוט קלט מהמשתמש לתוך משתנה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q code-q">7. מה עושה <code>ADD WS-A WS-B GIVING WS-SUM</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q7"> מחבר ומשנה את WS-A עצמו</label>
+        <label class="opt" data-value="b"><input type="radio" name="q7"> מחבר את WS-A ו-WS-B ושומר את התוצאה ב-WS-SUM, בלי לשנות אותם</label>
+        <label class="opt" data-value="c"><input type="radio" name="q7"> מוחק את WS-A ו-WS-B</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">8. ב-<code>DIVIDE WS-TOTAL BY WS-PEOPLE GIVING WS-SHARE REMAINDER WS-LEFTOVER</code> — מה נשמר ב-WS-LEFTOVER?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q8"> השארית של החילוק</label>
+        <label class="opt" data-value="b"><input type="radio" name="q8"> תוצאת החילוק המלאה</label>
+        <label class="opt" data-value="c"><input type="radio" name="q8"> מספר האנשים</label>
+      </div>
+    </div>
+
+    <div class="quiz-result" style="display:none"></div>
+  
+    <div class="lesson-nav">
+      <span></span>
+      <a href="quiz2.html">המבחן הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

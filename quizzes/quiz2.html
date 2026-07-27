@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מבחן חלק 2 — בקרת זרימה ומבנים | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="../lessons/lesson1.html">שיעורים</a>
+    <a href="quiz2.html" class="active">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// QUIZ02 JOB (COBOL),'PART2',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">מבחן חלק 2</p>
+    <h1>מבחן חלק 2 — בקרת זרימה ומבנים</h1>
+    <p class="muted">7 שאלות על שיעורים 11–17 (IF/EVALUATE, PERFORM, OCCURS, קבצים). בחרו תשובה — המשוב מיידי.</p>
+  </section>
+
+  <section style="padding-top:0">
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">1. אם WS-AGE שווה ל-15, מה תדפיס <code>IF WS-AGE &gt; 18 DISPLAY "ADULT" ELSE DISPLAY "MINOR" END-IF</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q9"> MINOR</label>
+        <label class="opt" data-value="b"><input type="radio" name="q9"> ADULT</label>
+        <label class="opt" data-value="c"><input type="radio" name="q9"> שגיאה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q">2. מה תפקידו של WHEN OTHER בתוך EVALUATE?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q10"> עוצר את התוכנית</label>
+        <label class="opt" data-value="b"><input type="radio" name="q10"> ענף ברירת מחדל, כשאף WHEN קודם לא התאים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q10"> חוזר על הבדיקה מההתחלה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">3. מה עושה PERFORM כשקוראים לו עם שם פסקה (paragraph)?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q11"> מוחק את הפסקה</label>
+        <label class="opt" data-value="b"><input type="radio" name="q11"> מדפיס את שם הפסקה למסך</label>
+        <label class="opt" data-value="c"><input type="radio" name="q11"> קופץ לפסקה, מריץ אותה, וחוזר למקום שבו הופעל</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">4. כמה פעמים ידפיס <code>PERFORM 3 TIMES DISPLAY "HELLO" END-PERFORM</code> את המילה HELLO?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q12"> 3</label>
+        <label class="opt" data-value="b"><input type="radio" name="q12"> אינסוף, עד שעוצרים ידנית</label>
+        <label class="opt" data-value="c"><input type="radio" name="q12"> פעם אחת בלבד</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q code-q">5. מה עושה <code>OCCURS 12 TIMES</code> בהגדרת משתנה?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q13"> מגביל את המשתנה לערך אחד בלבד</label>
+        <label class="opt" data-value="b"><input type="radio" name="q13"> הופך את המשתנה לטבלה עם 12 תאים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q13"> מכפיל את הערך פי 12</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">6. בלולאה <code>PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX &gt; 5</code>, כמה חזרות יתבצעו?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q14"> 5</label>
+        <label class="opt" data-value="b"><input type="radio" name="q14"> 4</label>
+        <label class="opt" data-value="c"><input type="radio" name="q14"> 6</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">7. מה תפקידו של סעיף AT END בפקודת READ על קובץ?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q15"> מוחק את הקובץ בסיום הקריאה</label>
+        <label class="opt" data-value="b"><input type="radio" name="q15"> פותח את הקובץ לכתיבה</label>
+        <label class="opt" data-value="c"><input type="radio" name="q15"> מגדיר מה לעשות כשמגיעים לסוף הקובץ</label>
+      </div>
+    </div>
+
+    <div class="quiz-result" style="display:none"></div>
+  
+    <div class="lesson-nav">
+      <span></span>
+      <a href="quiz3.html">המבחן הבא ←</a>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

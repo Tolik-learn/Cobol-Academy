@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מבחן חלק 3 — טקסט ומבנה קוד | COBOL Academy</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="brand"><span class="dot"></span> COBOL ACADEMY</a>
+  <nav>
+    <a href="../index.html">בית</a>
+    <a href="../lessons/lesson1.html">שיעורים</a>
+    <a href="quiz3.html" class="active">מבחנים</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="lesson-header">
+    <div class="jcl">// QUIZ03 JOB (COBOL),'PART3',CLASS=A<br>// EXEC COBOL</div>
+    <p class="eyebrow">מבחן חלק 3</p>
+    <h1>מבחן חלק 3 — טקסט ומבנה קוד</h1>
+    <p class="muted">6 שאלות על שיעורים 18–20 (STRING/UNSTRING, Level 88, COPY). בחרו תשובה — המשוב מיידי.</p>
+  </section>
+
+  <section style="padding-top:0">
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q code-q">1. מה עושה <code>DELIMITED BY SPACE</code> בתוך STRING?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q1"> מוסיף רווח בין החלקים</label>
+        <label class="opt" data-value="b"><input type="radio" name="q1"> לוקח מהמשתנה רק עד הרווח הראשון, בלי לגרור רווחים מיותרים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q1"> מוחק את כל הרווחים מהתוצאה הסופית</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">2. מה עושה <code>UNSTRING</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q2"> מפרקת מחרוזת אחת לכמה משתנים לפי תו מפריד</label>
+        <label class="opt" data-value="b"><input type="radio" name="q2"> מחברת כמה משתנים למחרוזת אחת</label>
+        <label class="opt" data-value="c"><input type="radio" name="q2"> מוחקת מחרוזת מהזיכרון</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">3. מה תפקידה של רמה 88 (Level 88) בהגדרת נתונים?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q3"> מגדירה משתנה חדש עם ערך התחלתי</label>
+        <label class="opt" data-value="b"><input type="radio" name="q3"> קובעת את אורך המשתנה במקום PIC</label>
+        <label class="opt" data-value="c"><input type="radio" name="q3"> נותנת שם קריא לתנאי, במקום להשוות ערך בכל IF מחדש</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="a">
+      <p class="q code-q">4. אם <code>88 IS-ACTIVE VALUE "A"</code> וגם WS-STATUS = "C", מה יקרה ב-<code>IF IS-ACTIVE</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q4"> התנאי לא יתקיים</label>
+        <label class="opt" data-value="b"><input type="radio" name="q4"> התנאי תמיד יתקיים</label>
+        <label class="opt" data-value="c"><input type="radio" name="q4"> תתקבל שגיאת קומפילציה</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="b">
+      <p class="q code-q">5. מה עושה בפועל הקומפיילר כשהוא נתקל בשורת <code>COPY CUSTREC.</code>?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q5"> מריץ תוכנית נפרדת בשם CUSTREC</label>
+        <label class="opt" data-value="b"><input type="radio" name="q5"> מחליף את השורה בתוכן המלא של קובץ CUSTREC.CPY</label>
+        <label class="opt" data-value="c"><input type="radio" name="q5"> יוצר קובץ חדש בשם CUSTREC</label>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="c">
+      <p class="q">6. מה היתרון המרכזי של COPY כשכמה תוכניות חולקות אותו מבנה נתונים?</p>
+      <div class="opts">
+        <label class="opt" data-value="a"><input type="radio" name="q6"> התוכניות רצות מהר יותר</label>
+        <label class="opt" data-value="b"><input type="radio" name="q6"> אין צורך ב-DATA DIVISION בכלל</label>
+        <label class="opt" data-value="c"><input type="radio" name="q6"> מספיק לעדכן את קובץ ה-COPY פעם אחת, וכל התוכניות מתעדכנות בקומפילציה הבאה</label>
+      </div>
+    </div>
+    <div class="quiz-result" style="display:none"></div>
+
+    <div class="lesson-nav">
+      <a href="../index.html">→ חזרה לדף הבית</a>
+      <span></span>
+    </div>
+  </section>
+</main>
+
+<footer>COBOL ACADEMY © 2026</footer>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

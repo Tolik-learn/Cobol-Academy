@@ -190,6 +190,9 @@ p{ margin: 0 0 1rem; }
 .lesson-nav a{ text-decoration:none; color: var(--text-muted); }
 .lesson-nav a:hover{ color: var(--amber); }
 .lesson-nav a.disabled{ pointer-events:none; opacity:.3; }
+.lesson-nav-top{
+  margin: 0 0 1.6rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--line);
+}
 
 .codeblock{ margin: 1.2rem 0 1.6rem; }
 .ruler{
@@ -274,6 +277,33 @@ details.reveal[open] summary::before{ content:"▾ "; }
 }
 .code-try:focus{ border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber-soft); }
 .code-try::placeholder{ color: var(--text-muted); opacity: 1; }
+
+/* code editor overlay: syntax-highlighted <pre> sits behind a transparent textarea */
+.code-editor-wrap{ position: relative; margin-top: .9rem; }
+.code-editor-wrap .code-try{ margin-top: 0; position: relative; z-index: 2;
+  background: transparent; color: transparent; caret-color: var(--text);
+}
+.code-editor-wrap .code-try::selection{ background: var(--amber-soft); }
+.code-editor-highlight{
+  position: absolute; inset: 0; z-index: 1; margin: 0; pointer-events: none;
+  font-family: var(--mono); font-size: .88rem; line-height: 1.6;
+  padding: .8rem 1rem; direction: ltr; text-align: left;
+  background: #0f0c09; border: 1.5px solid transparent; border-radius: 6px;
+  white-space: pre-wrap; word-wrap: break-word; overflow: hidden; color: var(--text);
+}
+.code-editor-highlight .tok-kw{ color: var(--amber); font-weight: 600; }
+.code-editor-highlight .tok-str{ color: #9fd08a; }
+
+.code-suggest{
+  display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; direction: ltr;
+}
+.code-suggest .chip{
+  font-family: var(--mono); font-size: .78rem; background: var(--panel-2);
+  border: 1px solid var(--amber-dim); color: var(--amber); border-radius: 4px;
+  padding: .25rem .55rem; cursor: pointer;
+}
+.code-suggest .chip:hover{ background: var(--amber-soft); }
+.code-suggest .chip .rest{ color: var(--text-muted); }
 
 .complete-row{ margin: 2.2rem 0; display:flex; align-items:center; gap: 1rem; flex-wrap: wrap; }
 .complete-row .status{ font-family: var(--mono); font-size: .85rem; color: var(--ok); display:none; }

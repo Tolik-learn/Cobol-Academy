@@ -163,4 +163,128 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuiz();
   initExercises();
   initCodeChallenges();
+  initCodeEditors();
 });
+
+// ---- code editor: syntax highlighting + keyword autocomplete for .code-try textareas ----
+const COBOL_KEYWORDS = [
+  'IDENTIFICATION DIVISION','ENVIRONMENT DIVISION','DATA DIVISION','PROCEDURE DIVISION',
+  'WORKING-STORAGE SECTION','FILE-CONTROL','FILE SECTION','PROGRAM-ID',
+  'END-EVALUATE','END-PERFORM','END-IF','END-STRING','END-UNSTRING','END-READ',
+  'EVALUATE','WHEN OTHER','WHEN','PERFORM VARYING','PERFORM UNTIL','PERFORM',
+  'VARYING','UNTIL','TIMES','FROM','BY','THRU',
+  'DISPLAY','ACCEPT','MOVE','ADD','SUBTRACT','MULTIPLY','DIVIDE',
+  'GIVING','REMAINDER','TO','INTO','IF','ELSE',
+  'STRING','UNSTRING','DELIMITED BY SIZE','DELIMITED BY SPACE','DELIMITED BY',
+  'OCCURS','COPY','SELECT','ASSIGN TO','ORGANIZATION IS','FD',
+  'OPEN INPUT','OPEN OUTPUT','OPEN','READ','WRITE','CLOSE','AT END',
+  'STOP RUN','VALUE','PIC','SPACES','ZERO'
+].sort((a,b) => b.length - a.length);
+
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function highlightCobol(src){
+  const escaped = escapeHtml(src);
+  const kwPattern = COBOL_KEYWORDS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  const combined = new RegExp('("[^"]*")|\\b(' + kwPattern + ')\\b', 'gi');
+  return escaped.replace(combined, (m, str, kw) => {
+    if(str) return '<span class="tok-str">' + str + '</span>';
+    return '<span class="tok-kw">' + kw + '</span>';
+  });
+}
+
+function currentWord(text, caret){
+  let start = caret;
+  while(start > 0 && /[A-Za-z0-9-]/.test(text[start-1])) start--;
+  let end = caret;
+  while(end < text.length && /[A-Za-z0-9-]/.test(text[end])) end++;
+  return { word: text.slice(start, end), start, end };
+}
+
+const AUTOCOMPLETE_LIST = [
+  'IDENTIFICATION DIVISION','ENVIRONMENT DIVISION','DATA DIVISION','PROCEDURE DIVISION',
+  'WORKING-STORAGE SECTION','PROGRAM-ID','DISPLAY','ACCEPT','MOVE','ADD','SUBTRACT',
+  'MULTIPLY','DIVIDE','GIVING','REMAINDER','IF','ELSE','END-IF','EVALUATE','WHEN',
+  'WHEN OTHER','END-EVALUATE','PERFORM','VARYING','UNTIL','TIMES','END-PERFORM',
+  'OCCURS','STRING','UNSTRING','DELIMITED BY','INTO','COPY','SELECT','ASSIGN TO',
+  'FD','OPEN','READ','WRITE','CLOSE','AT END','STOP RUN','PIC','VALUE'
+];
+
+function enhanceCodeEditor(textarea){
+  const wrap = document.createElement('div');
+  wrap.className = 'code-editor-wrap';
+  textarea.parentNode.insertBefore(wrap, textarea);
+
+  const highlight = document.createElement('pre');
+  highlight.className = 'code-editor-highlight';
+  highlight.innerHTML = highlightCobol(textarea.value);
+  wrap.appendChild(highlight);
+  wrap.appendChild(textarea);
+
+  const suggest = document.createElement('div');
+  suggest.className = 'code-suggest';
+  suggest.hidden = true;
+  wrap.parentNode.insertBefore(suggest, wrap.nextSibling);
+
+  function refreshHighlight(){
+    highlight.innerHTML = highlightCobol(textarea.value) + '\n';
+    highlight.scrollTop = textarea.scrollTop;
+    highlight.scrollLeft = textarea.scrollLeft;
+  }
+
+  function refreshSuggestions(){
+    const caret = textarea.selectionStart;
+    const { word } = currentWord(textarea.value, caret);
+    if(word.length < 2){ suggest.hidden = true; suggest.innerHTML = ''; return; }
+    const matches = AUTOCOMPLETE_LIST.filter(k =>
+      k.toUpperCase().startsWith(word.toUpperCase()) && k.toUpperCase() !== word.toUpperCase()
+    ).slice(0, 6);
+    if(matches.length === 0){ suggest.hidden = true; suggest.innerHTML = ''; return; }
+    suggest.innerHTML = '';
+    matches.forEach(m => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'chip';
+      chip.textContent = m;
+      chip.addEventListener('mousedown', ev => {
+        ev.preventDefault();
+        const { start, end } = currentWord(textarea.value, textarea.selectionStart);
+        const before = textarea.value.slice(0, start);
+        const after = textarea.value.slice(end);
+        textarea.value = before + m + after;
+        const newCaret = (before + m).length;
+        textarea.focus();
+        textarea.setSelectionRange(newCaret, newCaret);
+        refreshHighlight();
+        suggest.hidden = true;
+        suggest.innerHTML = '';
+      });
+      suggest.appendChild(chip);
+    });
+    suggest.hidden = false;
+  }
+
+  textarea.addEventListener('input', () => { refreshHighlight(); refreshSuggestions(); });
+  textarea.addEventListener('keyup', refreshSuggestions);
+  textarea.addEventListener('click', refreshSuggestions);
+  textarea.addEventListener('scroll', () => {
+    highlight.scrollTop = textarea.scrollTop;
+    highlight.scrollLeft = textarea.scrollLeft;
+  });
+  textarea.addEventListener('keydown', e => {
+    if(e.key === 'Tab' && !suggest.hidden && suggest.firstChild){
+      e.preventDefault();
+      suggest.firstChild.dispatchEvent(new Event('mousedown', { bubbles: true, cancelable: true }));
+    }
+    if(e.key === 'Escape'){ suggest.hidden = true; suggest.innerHTML = ''; }
+  });
+  textarea.addEventListener('blur', () => {
+    setTimeout(() => { suggest.hidden = true; suggest.innerHTML = ''; }, 150);
+  });
+}
+
+function initCodeEditors(){
+  document.querySelectorAll('.code-try').forEach(enhanceCodeEditor);
+}
